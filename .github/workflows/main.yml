@@ -12,8 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.2
       - uses: subosito/flutter-action@v2.10.0
+      - uses: dart-lang/setup-dart@v3
         with:
           channel: 'dev'
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: dart analyze
+      - run: dart test
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
