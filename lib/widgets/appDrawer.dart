@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
-              Icons.location_city,
+              Icons.location_on
             ),
             title: const Text('Locations'),
             onTap: () {
