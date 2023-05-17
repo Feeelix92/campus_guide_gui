@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class H2 extends StatefulWidget {
-  const H2({
+class H3 extends StatefulWidget {
+  const H3({
     super.key,
     required String text,
   }) : _text = text;
@@ -9,10 +9,10 @@ class H2 extends StatefulWidget {
   final String _text;
 
   @override
-  State<H2> createState() => _H2State();
+  State<H3> createState() => _H3State();
 }
 
-class _H2State extends State<H2> {
+class _H3State extends State<H3> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +20,7 @@ class _H2State extends State<H2> {
       child: Text(
         widget._text,
         style: const TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),
