@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class News extends StatefulWidget {
+class News extends StatelessWidget {
   const News({Key? key}) : super(key: key);
 
   @override
-  State<News> createState() => _NewsState();
-}
-
-class _NewsState extends State<News> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Nachrichten'),
+      ),
+      body: const Center(
+        child: Text('Nachrichten Page'),
+      ),
+    );
   }
 }
