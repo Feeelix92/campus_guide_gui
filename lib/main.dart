@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               title: const Text('Kalender'),
               onTap: () {
-                // Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               title: const Text('Nachrichten'),
               onTap: () {
-                // Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               title: const Text('Locations'),
               onTap: () {
-               // Navigator.pop(context);
+               Navigator.pop(context);
               },
             ),
           ],
