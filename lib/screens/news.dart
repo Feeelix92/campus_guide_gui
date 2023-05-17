@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/appDrawer.dart';
+import '../widgets/customAppBar.dart';
 import '../widgets/h2.dart';
 
 class News extends StatelessWidget {
@@ -6,11 +8,10 @@ class News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Nachrichten'),
-      ),
-      body: const Center(
+    return const Scaffold(
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
+      body: Center(
         child: Column(
           children: [
             H2(text: 'Nachrichten Page'),

@@ -11,12 +11,22 @@ class AppDrawer extends StatelessWidget {
         children: [
           ListTile(
             leading: const Icon(
+              Icons.home,
+            ),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/');
+            },
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.calendar_month_outlined,
             ),
             title: const Text('Kalender'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/calendar');
+              Navigator.pushNamed(context, '/calendar');
             },
           ),
           ListTile(
@@ -26,7 +36,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Nachrichten'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/news');
+              Navigator.pushNamed(context, '/news');
             },
           ),
           ListTile(
@@ -36,7 +46,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Locations'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/locations');
+              Navigator.pushNamed(context, '/locations');
             },
           ),
         ],

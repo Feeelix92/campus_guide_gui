@@ -15,11 +15,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/': (context) => const Home(title: 'Campus Guide'),
-        '/calendar': (context) => const Calendar(),
-        '/news': (context) => const News(),
-        '/locations': (context) => const Locations(),
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case '/':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => const Home(title: 'Campus Guide'),
+            );
+          case '/calendar':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => const Calendar(),
+            );
+          case '/news':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => const News(),
+            );
+          case '/locations':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => const Locations(),
+            );
+          default:
+            return null;
+        }
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            body: Center(
+              child: Text('Page not found'),
+            ),
+          ),
+        );
       },
       title: 'Campus Guide',
       theme: ThemeData(
