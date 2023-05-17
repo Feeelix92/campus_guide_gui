@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/appDrawer.dart';
+import '../widgets/h1.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
@@ -21,60 +23,11 @@ class _HomeState extends State<Home> {
       body: const Center(
         child: Column(
           children: <Widget>[
-            Text(
-              'Herzlich Willkommen im Campus Guide!',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            H1(
+              text: 'Herzlich Willkommen im Campus Guide!',
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          ListTile(
-            leading: const Icon(
-              Icons.calendar_month_outlined,
-            ),
-            title: const Text('Kalender'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/calendar');
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.chat,
-            ),
-            title: const Text('Nachrichten'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/news');
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.location_city,
-            ),
-            title: const Text('Locations'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/locations');
-            },
-          ),
-        ],
       ),
     );
   }

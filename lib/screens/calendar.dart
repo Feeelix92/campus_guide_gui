@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/h2.dart';
 
 class Calendar extends StatelessWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -10,7 +11,12 @@ class Calendar extends StatelessWidget {
         title: const Text('Kalender'),
       ),
       body: const Center(
-        child: Text('Kalender Page'),
+        child: Column(
+          children: [
+            H2(text: 'Kalender Page'),
+            Placeholder(),
+          ],
+        ),
       ),
     );
   }

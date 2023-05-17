@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/h2.dart';
 
 class News extends StatelessWidget {
   const News({Key? key}) : super(key: key);
@@ -10,7 +11,12 @@ class News extends StatelessWidget {
         title: const Text('Nachrichten'),
       ),
       body: const Center(
-        child: Text('Nachrichten Page'),
+        child: Column(
+          children: [
+            H2(text: 'Nachrichten Page'),
+            Placeholder(),
+          ],
+        ),
       ),
     );
   }
