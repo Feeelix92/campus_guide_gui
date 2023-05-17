@@ -15,11 +15,14 @@ class H1 extends StatefulWidget {
 class _H1State extends State<H1> {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      widget._text,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        widget._text,
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
