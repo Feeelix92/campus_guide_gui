@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    postRequest('admin', 'admin123').then((value) => print(value));
+    login('admin', 'admin123');
     super.initState();
   }
 
