@@ -37,54 +37,52 @@ class _HomeState extends State<Home> {
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Expanded(
-            child: SizedBox(
-              width: 250.0,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  ListTile(
-                    leading: const Icon(
-                      Icons.home,
-                    ),
-                    title: const Text('Home'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/');
-                    },
+          SizedBox(
+            width: 250.0,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.home,
                   ),
-                  ListTile(
-                    leading: const Icon(
-                      Icons.calendar_month_outlined,
-                    ),
-                    title: const Text('Kalender'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/calendar');
-                    },
+                  title: const Text('Home'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.calendar_month_outlined,
                   ),
-                  ListTile(
-                    leading: const Icon(
-                      Icons.chat,
-                    ),
-                    title: const Text('Nachrichten'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/news');
-                    },
+                  title: const Text('Kalender'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/calendar');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.chat,
                   ),
-                  ListTile(
-                    leading: const Icon(
-                        Icons.location_on
-                    ),
-                    title: const Text('Locations'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, '/locations');
-                    },
+                  title: const Text('Nachrichten'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/news');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                      Icons.location_on
                   ),
-                ],
-              ),
+                  title: const Text('Locations'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/locations');
+                  },
+                ),
+              ],
             ),
           ),
 
