@@ -12,7 +12,7 @@ Future<String> login(String username, String password) async {
           "username": username,
           "password": password,
         }));
-    print('${response.body} Response from Login');
+    print('Response from Login: ${response.body}');
     return response.body;
   } catch (e) {
     return 'ERROR $e';
@@ -31,7 +31,7 @@ Future<String> register(String username, String password, String email) async {
           "email": email,
           "password": password,
         }));
-    print('${response.body} Response from Registration');
+    print('Response from Registration: ${response.body}');
     return response.body;
   } catch (e) {
     return 'ERROR $e';
