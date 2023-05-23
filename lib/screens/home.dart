@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/login.dart';
+import '../model/auth.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
@@ -17,7 +17,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    login('admin', 'admin123');
+    register('admin', 'admin@admin.com', 'admin123');
+    //login('admin', 'admin123');
     super.initState();
   }
 
