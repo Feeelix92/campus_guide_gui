@@ -12,7 +12,11 @@ Future<String> login(String username, String password) async {
           "username": username,
           "password": password,
         }));
-    print('Response from Login: ${response.body}');
+    if(response.statusCode == 403){
+      print('403 Error');
+    }else if(response.statusCode == 200){
+      print('Response from Login: ${response.body}');
+    }
     return response.body;
   } catch (e) {
     return 'ERROR $e';
@@ -31,9 +35,14 @@ Future<String> register(String username, String password, String email) async {
           "email": email,
           "password": password,
         }));
-    print('Response from Registration: ${response.body}');
+    if(response.statusCode == 403){
+      print('403 Error');
+    }else if(response.statusCode == 200){
+      print('Response from Registration: ${response.body}');
+    }
     return response.body;
   } catch (e) {
     return 'ERROR $e';
   }
 }
+
