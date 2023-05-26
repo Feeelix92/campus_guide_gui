@@ -1,26 +1,22 @@
 import 'package:campus_guide_gui/data/constants.dart';
+import 'package:campus_guide_gui/widgets/customAppBar.dart';
+import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/appDrawer.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.appName),
-      ),
-      body: const Center(
+    return const Scaffold(
+      appBar: CustomAppBar(),
+      drawer: AppDrawer(),
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Willkommen auf der Hauptseite!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            H1(text: 'Willkommen auf der Hauptseite!')
           ],
         ),
       ),

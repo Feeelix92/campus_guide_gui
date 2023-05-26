@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
+import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
 class Locations extends StatelessWidget {
@@ -14,8 +15,7 @@ class Locations extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            H2(text: 'Locations Page'),
-            Placeholder(),
+            H1(text: 'Locations Page'),
           ],
         ),
       ),

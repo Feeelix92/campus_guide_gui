@@ -2,6 +2,7 @@ import 'package:campus_guide_gui/screens/register.dart';
 import 'package:flutter/material.dart';
 
 import '../data/constants.dart';
+import '../model/auth.dart';
 import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 import 'home.dart';
@@ -51,10 +52,11 @@ class Login extends StatelessWidget {
 
                   // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
                   if (username.isNotEmpty && password.isNotEmpty) {
+                    login(username, password);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => const Home(),
                       ),
                     );
                   } else {

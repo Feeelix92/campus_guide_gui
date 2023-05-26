@@ -1,3 +1,4 @@
+import 'package:campus_guide_gui/model/auth.dart';
 import 'package:flutter/material.dart';
 
 import '../data/constants.dart';
@@ -49,17 +50,17 @@ class Registration extends StatelessWidget {
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  // Hier können Sie die Registrierungslogik implementieren
                   String username = _usernameController.text;
                   String email = _emailController.text;
                   String password = _passwordController.text;
 
                   // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
                   if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+                    register(username, email, password);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => const Home(),
                       ),
                     );
                   } else {
