@@ -1,6 +1,7 @@
 import 'package:campus_guide_gui/screens/calendar.dart';
 import 'package:campus_guide_gui/screens/home.dart';
 import 'package:campus_guide_gui/screens/locations.dart';
+import 'package:campus_guide_gui/screens/login.dart';
 import 'package:campus_guide_gui/screens/news.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,11 @@ class MyApp extends StatelessWidget {
             return PageRouteBuilder(
               maintainState: true,
               pageBuilder: (context, animation, secondaryAnimation) => const Home(),
+            );
+            case '/auth':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => Login(),
             );
           case '/calendar':
             return PageRouteBuilder(
