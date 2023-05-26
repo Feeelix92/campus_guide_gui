@@ -1,3 +1,4 @@
+import 'package:campus_guide_gui/data/constants.dart';
 import 'package:campus_guide_gui/screens/calendar.dart';
 import 'package:campus_guide_gui/screens/home.dart';
 import 'package:campus_guide_gui/screens/locations.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           case '/':
             return PageRouteBuilder(
               maintainState: true,
-              pageBuilder: (context, animation, secondaryAnimation) => const Home(title: 'Campus Guide'),
+              pageBuilder: (context, animation, secondaryAnimation) => const Home(),
             );
           case '/calendar':
             return PageRouteBuilder(
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      title: 'Campus Guide',
+      title: Constants.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
