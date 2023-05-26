@@ -28,8 +28,6 @@ class Login extends StatelessWidget {
             children: [
               const H1(text: 'Login!'),
               const SizedBox(height: 20),
-              const H2(text: 'Willkommen!'),
-              const SizedBox(height: 20),
               TextField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
