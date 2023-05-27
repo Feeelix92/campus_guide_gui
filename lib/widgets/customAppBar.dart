@@ -1,3 +1,4 @@
+import 'package:campus_guide_gui/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,6 +15,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: const Text('Campus Guide'),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: IconButton(
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserProfile()),
+              )
+            },
+              icon: const Icon(Icons.person)
+          )
+        )
+      ],
     );
   }
 }
