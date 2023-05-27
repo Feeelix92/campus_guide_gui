@@ -2,6 +2,7 @@ import 'package:campus_guide_gui/screens/calendar.dart';
 import 'package:campus_guide_gui/screens/home.dart';
 import 'package:campus_guide_gui/screens/locations.dart';
 import 'package:campus_guide_gui/screens/news.dart';
+import 'package:campus_guide_gui/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,6 +38,11 @@ class MyApp extends StatelessWidget {
             return PageRouteBuilder(
               maintainState: true,
               pageBuilder: (context, animation, secondaryAnimation) => const Locations(),
+            );
+            case '/profile':
+            return PageRouteBuilder(
+              maintainState: true,
+              pageBuilder: (context, animation, secondaryAnimation) => UserProfile(),
             );
           default:
             return null;

@@ -20,10 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: IconButton(
             onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const UserProfile()),
-              )
+              Navigator.pushNamed(context, '/profile')
             },
               icon: const Icon(Icons.person)
           )

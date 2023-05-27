@@ -18,8 +18,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // ToDo change Login and Register
-    register('admin', 'admin@admin.com', 'admin123');
-    login('admin', 'admin123');
+    //register('admin', 'admin@admin.com', 'admin123');
+    //login('admin', 'admin123');
     super.initState();
   }
 
