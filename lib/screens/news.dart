@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
+import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
 class News extends StatelessWidget {
@@ -14,8 +15,7 @@ class News extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            H2(text: 'Nachrichten Page'),
-            Placeholder(),
+            H1(text: 'Nachrichten Page'),
           ],
         ),
       ),
