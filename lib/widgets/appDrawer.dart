@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+import '../core/app_router.gr.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -15,8 +18,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Home'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/');
+              AutoRouter.of(context).push(const HomeRoute());
             },
           ),
           ListTile(
@@ -25,8 +27,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Kalender'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/calendar');
+              AutoRouter.of(context).push(const CalendarRoute());
             },
           ),
           ListTile(
@@ -35,8 +36,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Nachrichten'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/news');
+              AutoRouter.of(context).push(const NewsRoute());
             },
           ),
           ListTile(
@@ -45,8 +45,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Locations'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/locations');
+              AutoRouter.of(context).push(const LocationsRoute());
             },
           ),
           ListTile(
@@ -55,8 +54,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Anmelden'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/auth');
+              AutoRouter.of(context).push(LoginRoute());
             },
           ),
         ],

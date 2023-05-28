@@ -1,17 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/register.dart';
 import 'package:flutter/material.dart';
 
+import '../core/auth.dart';
 import '../data/constants.dart';
-import '../model/auth.dart';
 import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 import 'home.dart';
 
+@RoutePage()
 class Login extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // register('admin', 'admin@admin.com', 'admin123');
-  // login('admin', 'admin123');
   Login({super.key});
 
   @override

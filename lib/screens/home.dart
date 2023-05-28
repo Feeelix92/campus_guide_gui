@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/widgets/customAppBar.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/appDrawer.dart';
 
+@RoutePage()
 class Home extends StatelessWidget {
   const Home({super.key});
 

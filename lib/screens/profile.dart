@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 
-
+@RoutePage()
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
