@@ -1,4 +1,3 @@
-import 'package:campus_guide_gui/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 import '../data/constants.dart';

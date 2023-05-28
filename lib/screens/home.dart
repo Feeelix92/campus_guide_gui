@@ -1,4 +1,3 @@
-import 'package:campus_guide_gui/data/constants.dart';
 import 'package:campus_guide_gui/widgets/customAppBar.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
