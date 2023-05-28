@@ -126,25 +126,38 @@ class _TopPortion extends StatelessWidget {
           child: SizedBox(
             width: 150,
             height: 150,
-            child: userImage.isEmpty ?
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                userImage.isEmpty ?
                 const CircleAvatar(
                   child: Icon(
                     Icons.person,
                     size: 65,
                   ),
                 )
-            : Container(
+                    : Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          userImage
+                            userImage
                         )
                     ),
                   ),
-                )
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: IconButton.filled(
+                    onPressed: () {  }, 
+                    icon: const Icon(Icons.edit)
+                  )
+                ),
+              ],
+            )
             ),
           ),
       ],
