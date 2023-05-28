@@ -15,7 +15,7 @@ class UserProfile extends StatelessWidget {
       drawer: const AppDrawer(),
       body: Column(
         children: [
-          const Expanded(flex: 2, child: _TopPortion()),
+          Expanded(flex: 2, child: _TopPortion()),
           Expanded(
             flex: 3,
             child: Padding(
@@ -98,9 +98,9 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  const _TopPortion({Key? key}) : super(key: key);
+  _TopPortion({Key? key}) : super(key: key);
 
-  final String userImage = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80";
+  String userImage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,14 @@ class _TopPortion extends StatelessWidget {
           child: SizedBox(
             width: 150,
             height: 150,
-            child: Container(
+            child: userImage.isEmpty ?
+                const CircleAvatar(
+                  child: Icon(
+                    Icons.person,
+                    size: 60,
+                  ),
+                )
+            : Container(
                   decoration: BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
