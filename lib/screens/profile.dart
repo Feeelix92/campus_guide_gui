@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
-
+import '../widgets/studentId.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
 
-  final String userName = "Pascal Block";
+  final String firstName = "Pascal";
+  final String lastName = "Block";
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,16 @@ class UserProfile extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    userName,
+                    '$firstName $lastName',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  const _ProfileInfoRow()
+                  const _ProfileInfoRow(),
+                  const SizedBox(height: 16),
+                  StudentID()
                 ],
               ),
             ),
@@ -126,7 +130,7 @@ class _TopPortion extends StatelessWidget {
                 const CircleAvatar(
                   child: Icon(
                     Icons.person,
-                    size: 60,
+                    size: 65,
                   ),
                 )
             : Container(
