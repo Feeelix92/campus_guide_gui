@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<String> login(String username, String password) async {
+Future<LoginData> login(String username, String password) async {
   var baseURL = 'http://localhost:8080';
   var url = '$baseURL/api/v1/auth/authenticate';
   print(url);
@@ -17,13 +17,13 @@ Future<String> login(String username, String password) async {
     }else if(response.statusCode == 200){
       print('Response from Login: ${response.body}');
     }
-    return response.body;
+    return LoginData.fromJson(jsonDecode(response.body));
   } catch (e) {
-    return 'ERROR $e';
+    throw Exception('ERROR $e');
   }
 }
 
-Future<String> register(String username, String password, String email) async {
+Future<LoginData> register(String username, String password, String email) async {
   var baseURL = 'http://localhost:8080';
   var url = '$baseURL/api/v1/auth/register';
   print(url);
@@ -40,9 +40,24 @@ Future<String> register(String username, String password, String email) async {
     }else if(response.statusCode == 200){
       print('Response from Registration: ${response.body}');
     }
-    return response.body;
+    return LoginData.fromJson(jsonDecode(response.body));
   } catch (e) {
-    return 'ERROR $e';
+    throw Exception('ERROR $e');
   }
 }
 
+class LoginData {
+  String? token;
+
+  LoginData({this.token});
+
+  LoginData.fromJson(Map<String, dynamic> json) {
+    token = json['token'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    return data;
+  }
+}

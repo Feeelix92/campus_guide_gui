@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/register.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/auth.dart';
 import '../data/constants.dart';
@@ -13,7 +14,7 @@ class Login extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   Login({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +51,7 @@ class Login extends StatelessWidget {
 
                   // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
                   if (username.isNotEmpty && password.isNotEmpty) {
+
                     login(username, password);
                     Navigator.push(
                       context,
