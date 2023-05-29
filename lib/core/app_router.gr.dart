@@ -9,13 +9,13 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:campus_guide_gui/screens/calendar.dart' as _i1;
-import 'package:campus_guide_gui/screens/home.dart' as _i2;
-import 'package:campus_guide_gui/screens/locations.dart' as _i3;
-import 'package:campus_guide_gui/screens/login.dart' as _i4;
-import 'package:campus_guide_gui/screens/news.dart' as _i5;
-import 'package:campus_guide_gui/screens/profile.dart' as _i6;
-import 'package:campus_guide_gui/screens/register.dart' as _i7;
+import 'package:campus_guide_gui/screens/calendar_screen.dart' as _i1;
+import 'package:campus_guide_gui/screens/home_screen.dart' as _i2;
+import 'package:campus_guide_gui/screens/locations_screen.dart' as _i3;
+import 'package:campus_guide_gui/screens/login_screen.dart' as _i4;
+import 'package:campus_guide_gui/screens/news_screen.dart' as _i5;
+import 'package:campus_guide_gui/screens/profile_screen.dart' as _i6;
+import 'package:campus_guide_gui/screens/register_screen.dart' as _i7;
 import 'package:flutter/material.dart' as _i9;
 
 abstract class $AppRouter extends _i8.RootStackRouter {

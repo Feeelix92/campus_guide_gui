@@ -1,20 +1,19 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/register.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/h1.dart';
-import '../widgets/h2.dart';
-import 'home.dart';
+import 'home_screen.dart';
 
 @RoutePage()
-class Login extends StatelessWidget {
+class Registration extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  Login({super.key});
-  
+
+  Registration({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +26,19 @@ class Login extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const H1(text: 'Login!'),
+              const H1(text: 'Registrieren Sie sich'),
               const SizedBox(height: 20),
               TextField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
                   labelText: 'Benutzername',
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'E-Mail',
                 ),
               ),
               const SizedBox(height: 10),
@@ -47,12 +53,12 @@ class Login extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   String username = _usernameController.text;
+                  String email = _emailController.text;
                   String password = _passwordController.text;
 
-                  // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
-                  if (username.isNotEmpty && password.isNotEmpty) {
-
-                    login(username, password);
+                  // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
+                  if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+                    register(username, email, password);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -64,7 +70,7 @@ class Login extends StatelessWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                         title: const Text('Fehler'),
-                        content: const Text('Ungültiger Benutzername oder Passwort.'),
+                        content: const Text('Bitte füllen Sie alle Felder aus.'),
                         actions: [
                           TextButton(
                             onPressed: () {
@@ -76,18 +82,6 @@ class Login extends StatelessWidget {
                       ),
                     );
                   }
-                },
-                child: const Text('Anmelden'),
-              ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Registration(),
-                    ),
-                  );
                 },
                 child: const Text('Registrieren'),
               ),
