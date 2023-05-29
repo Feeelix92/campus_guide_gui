@@ -59,6 +59,7 @@ class AppDrawer extends StatelessWidget {
               title: const Text('Abmelden'),
               onTap: () {
                 authData.logout();
+                AutoRouter.of(context).push(const HomeRoute());
               },
             ),
           ]
