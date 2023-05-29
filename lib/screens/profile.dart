@@ -1,8 +1,10 @@
+import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/studentId.dart';
+import '../widgets/h2.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -24,13 +26,7 @@ class UserProfile extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text(
-                    '$firstName $lastName',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
+                  H1(text: '$firstName $lastName'),
                   const SizedBox(height: 16),
                   const _ProfileInfoRow(),
                   const SizedBox(height: 16),
@@ -105,6 +101,9 @@ class _TopPortion extends StatelessWidget {
   _TopPortion({Key? key}) : super(key: key);
 
   String userImage = "";
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +151,7 @@ class _TopPortion extends StatelessWidget {
                   bottom: 0,
                   right: 0,
                   child: IconButton.filled(
-                    onPressed: () {  }, 
+                    onPressed: () => _dialogBuilder(context),
                     icon: const Icon(Icons.edit)
                   )
                 ),
@@ -163,4 +162,71 @@ class _TopPortion extends StatelessWidget {
       ],
     );
   }
+
+  Future<void> _dialogBuilder(BuildContext context) async {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          child: Center(
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const H2(text: 'Profil bearbeiten'),
+                  TextField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Benutzername',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'E-Mail',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Passwort',
+                    ),
+                    obscureText: true,
+                  ),
+                  TextField(
+                    controller: _passwordController,
+                    decoration: const InputDecoration(
+                      labelText: 'Passwort wiederholen',
+                    ),
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Abbrechen')
+                      ),
+                      const SizedBox(width: 10),
+                      FilledButton(
+                        child: const Text('Speichern'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
+
+// Infobox für Text
