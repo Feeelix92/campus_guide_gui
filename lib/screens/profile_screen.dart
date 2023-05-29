@@ -4,8 +4,8 @@ import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 
 @RoutePage()
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+class UserProfileScreen extends StatelessWidget {
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   final String userName = "Pascal Block";
 

@@ -6,8 +6,8 @@ import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
 @RoutePage()
-class Calendar extends StatelessWidget {
-  const Calendar({Key? key}) : super(key: key);
+class CalendarScreen extends StatelessWidget {
+  const CalendarScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

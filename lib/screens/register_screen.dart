@@ -7,12 +7,12 @@ import '../widgets/h1.dart';
 import 'home_screen.dart';
 
 @RoutePage()
-class Registration extends StatelessWidget {
+class RegistrationScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Registration({super.key});
+  RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class Registration extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Home(),
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   } else {

@@ -6,8 +6,8 @@ import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
 @RoutePage()
-class Locations extends StatelessWidget {
-  const Locations({Key? key}) : super(key: key);
+class LocationScreen extends StatelessWidget {
+  const LocationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class Locations extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Locations Page'),
+            H1(text: 'Location Page'),
           ],
         ),
       ),

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 
 @RoutePage()
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

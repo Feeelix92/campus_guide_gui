@@ -6,8 +6,8 @@ import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
 @RoutePage()
-class News extends StatelessWidget {
-  const News({Key? key}) : super(key: key);
+class NewsScreen extends StatelessWidget {
+  const NewsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

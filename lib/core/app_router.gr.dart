@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:campus_guide_gui/screens/calendar_screen.dart' as _i1;
 import 'package:campus_guide_gui/screens/home_screen.dart' as _i2;
-import 'package:campus_guide_gui/screens/locations_screen.dart' as _i3;
+import 'package:campus_guide_gui/screens/location_screen.dart' as _i3;
 import 'package:campus_guide_gui/screens/login_screen.dart' as _i4;
 import 'package:campus_guide_gui/screens/news_screen.dart' as _i5;
 import 'package:campus_guide_gui/screens/profile_screen.dart' as _i6;
@@ -26,19 +26,19 @@ abstract class $AppRouter extends _i8.RootStackRouter {
     CalendarRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.Calendar(),
+        child: const _i1.CalendarScreen(),
       );
     },
     HomeRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.Home(),
+        child: const _i2.HomeScreen(),
       );
     },
     LocationsRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.Locations(),
+        child: const _i3.LocationScreen(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -46,19 +46,19 @@ abstract class $AppRouter extends _i8.RootStackRouter {
           orElse: () => const LoginRouteArgs());
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.Login(key: args.key),
+        child: _i4.LoginScreen(key: args.key),
       );
     },
     NewsRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.News(),
+        child: const _i5.NewsScreen(),
       );
     },
     UserProfileRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.UserProfile(),
+        child: const _i6.UserProfileScreen(),
       );
     },
     RegistrationRoute.name: (routeData) {
@@ -66,14 +66,14 @@ abstract class $AppRouter extends _i8.RootStackRouter {
           orElse: () => const RegistrationRouteArgs());
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i7.Registration(key: args.key),
+        child: _i7.RegistrationScreen(key: args.key),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.Calendar]
+/// [_i1.CalendarScreen]
 class CalendarRoute extends _i8.PageRouteInfo<void> {
   const CalendarRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -87,7 +87,7 @@ class CalendarRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.Home]
+/// [_i2.HomeScreen]
 class HomeRoute extends _i8.PageRouteInfo<void> {
   const HomeRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -101,7 +101,7 @@ class HomeRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.Locations]
+/// [_i3.LocationScreen]
 class LocationsRoute extends _i8.PageRouteInfo<void> {
   const LocationsRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -115,7 +115,7 @@ class LocationsRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.Login]
+/// [_i4.LoginScreen]
 class LoginRoute extends _i8.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     _i9.Key? key,
@@ -144,7 +144,7 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i5.News]
+/// [_i5.NewsScreen]
 class NewsRoute extends _i8.PageRouteInfo<void> {
   const NewsRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -158,7 +158,7 @@ class NewsRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.UserProfile]
+/// [_i6.UserProfileScreen]
 class UserProfileRoute extends _i8.PageRouteInfo<void> {
   const UserProfileRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -172,7 +172,7 @@ class UserProfileRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.Registration]
+/// [_i7.RegistrationScreen]
 class RegistrationRoute extends _i8.PageRouteInfo<RegistrationRouteArgs> {
   RegistrationRoute({
     _i9.Key? key,
