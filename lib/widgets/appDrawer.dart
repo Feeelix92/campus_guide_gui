@@ -1,14 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../core/app_router.gr.dart';
+import '../core/auth.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Consumer<Auth>(builder: (context, authData, child) {
+      return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -48,17 +51,31 @@ class AppDrawer extends StatelessWidget {
               AutoRouter.of(context).push(const LocationsRoute());
             },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.login
+          if (authData.isAuth)...[
+            ListTile(
+              leading: const Icon(
+                  Icons.logout
+              ),
+              title: const Text('Abmelden'),
+              onTap: () {
+                authData.logout();
+              },
             ),
-            title: const Text('Anmelden'),
-            onTap: () {
-              AutoRouter.of(context).push(LoginRoute());
-            },
-          ),
+          ]
+          else...[
+            ListTile(
+              leading: const Icon(
+                  Icons.login
+              ),
+              title: const Text('Anmelden'),
+              onTap: () {
+                AutoRouter.of(context).push(LoginRoute());
+              },
+            ),
+          ]
         ],
       ),
     );
+    });
   }
 }

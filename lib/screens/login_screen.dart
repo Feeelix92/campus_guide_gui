@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/auth.dart';
@@ -17,84 +18,85 @@ class LoginScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(Constants.appName),
-      ),
-      body: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 3,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const H1(text: 'Login!'),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Benutzername',
+    return Consumer<Auth>(builder: (context, authData, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text(Constants.appName),
+        ),
+        body: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const H1(text: 'Login!'),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Benutzername',
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Passwort',
+                const SizedBox(height: 10),
+                TextField(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
+                    labelText: 'Passwort',
+                  ),
+                  obscureText: true,
                 ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  String username = _usernameController.text;
-                  String password = _passwordController.text;
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    String username = _usernameController.text;
+                    String password = _passwordController.text;
 
-                  // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
-                  if (username.isNotEmpty && password.isNotEmpty) {
-
-                    login(username, password);
+                    // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
+                    if (username.isNotEmpty && password.isNotEmpty) {
+                      authData.login(username, password);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Fehler'),
+                          content: const Text('Ungültiger Benutzername oder Passwort.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Anmelden'),
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => RegistrationScreen(),
                       ),
                     );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Fehler'),
-                        content: const Text('Ungültiger Benutzername oder Passwort.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Anmelden'),
-              ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RegistrationScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Registrieren'),
-              ),
-            ],
+                  },
+                  child: const Text('Registrieren'),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -1,8 +1,17 @@
 import 'package:campus_guide_gui/core/app_router.dart';
+import 'package:campus_guide_gui/core/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var data = prefs.getString('token') ?? ''; //null check
+  runApp(ChangeNotifierProvider(
+    create: (context) => Auth(),
+    child: MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
