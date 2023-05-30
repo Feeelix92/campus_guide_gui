@@ -1,7 +1,6 @@
 import '../widgets/qr_code.dart';
 import 'package:flutter/material.dart';
 
-
 class StudentID extends StatefulWidget {
   StudentID({Key? key}) : super(key: key);
 
@@ -19,28 +18,24 @@ class StudentID extends StatefulWidget {
 class _StudentIDState extends State<StudentID> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          FilledButton(
-            onPressed: () {
-              setState(() {
-                widget._studentIdIsVisible = !widget._studentIdIsVisible;
-              });
-            },
-            child: const Text('Digitaler Studienausweis'),
-          ),
-          const SizedBox(height: 16),
-          Visibility(
-              visible: widget._studentIdIsVisible,
-              child: QrCode(
-                  firstName: widget.firstName,
-                  lastName: widget.lastName,
-                  matriculationNumber: widget.matriculationNumber,
-                  startSemesterTicket: widget.startSemesterTicket,
-                  endSemesterTicket: widget.endSemesterTicket
-              )
-          )
-        ]
-    );
+    return Column(children: [
+      FilledButton(
+        onPressed: () {
+          setState(() {
+            widget._studentIdIsVisible = !widget._studentIdIsVisible;
+          });
+        },
+        child: const Text('Digitaler Studienausweis'),
+      ),
+      const SizedBox(height: 16),
+      Visibility(
+          visible: widget._studentIdIsVisible,
+          child: QrCode(
+              firstName: widget.firstName,
+              lastName: widget.lastName,
+              matriculationNumber: widget.matriculationNumber,
+              startSemesterTicket: widget.startSemesterTicket,
+              endSemesterTicket: widget.endSemesterTicket))
+    ]);
   }
 }
