@@ -17,25 +17,19 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       drawer: const AppDrawer(),
-      body: Column(
-        children: [
-          Expanded(flex: 2, child: _TopPortion()),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  H1(text: '$firstName $lastName'),
-                  const SizedBox(height: 16),
-                  const _ProfileInfoRow(),
-                  const SizedBox(height: 16),
-                  StudentID()
-                ],
-              ),
-            ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              _TopPortion(),
+              H1(text: '$firstName $lastName'),
+              const SizedBox(height: 16),
+              const _ProfileInfoRow(),
+              const SizedBox(height: 16),
+              StudentID()
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -107,8 +101,7 @@ class _TopPortion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
+    return Column(
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 50),
@@ -228,5 +221,3 @@ class _TopPortion extends StatelessWidget {
     );
   }
 }
-
-// Infobox für Text
