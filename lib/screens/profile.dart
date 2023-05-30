@@ -1,4 +1,5 @@
 import 'package:campus_guide_gui/widgets/h1.dart';
+import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/appDrawer.dart';
@@ -159,8 +160,10 @@ class _TopPortion extends StatelessWidget {
   Future<void> _dialogBuilder(BuildContext context) async {
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
         return SizedBox(
+          height: 700,
           child: Center(
             child: Container(
               margin: const EdgeInsets.all(10),
@@ -169,6 +172,7 @@ class _TopPortion extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const H2(text: 'Profil bearbeiten'),
+                  const ImageUpload(),
                   TextField(
                     controller: _usernameController,
                     decoration: const InputDecoration(
@@ -212,6 +216,7 @@ class _TopPortion extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 10)
                 ],
               ),
             ),
