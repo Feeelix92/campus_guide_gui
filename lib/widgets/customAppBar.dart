@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:flutter/material.dart';
+
+import '../data/constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -12,8 +16,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: const Text('Campus Guide'),
+      title: const Text(Constants.appName),
+      actions: [
+        Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: IconButton(
+                onPressed: () => {
+                AutoRouter.of(context).push(const UserProfileRoute())},
+                icon: const Icon(Icons.person)
+            )
+        )
+      ],
     );
   }
 }

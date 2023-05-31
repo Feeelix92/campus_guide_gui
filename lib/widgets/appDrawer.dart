@@ -1,11 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../core/app_router.gr.dart';
+import '../core/auth.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Consumer<Auth>(builder: (context, authData, child) {
+      return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -15,8 +21,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Home'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/');
+              AutoRouter.of(context).push(const HomeRoute());
             },
           ),
           ListTile(
@@ -25,8 +30,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Kalender'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/calendar');
+              AutoRouter.of(context).push(const CalendarRoute());
             },
           ),
           ListTile(
@@ -35,8 +39,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Nachrichten'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/news');
+              AutoRouter.of(context).push(const NewsRoute());
             },
           ),
           ListTile(
@@ -45,12 +48,35 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Locations'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/locations');
+              AutoRouter.of(context).push(const LocationsRoute());
             },
           ),
+          if (authData.isAuth)...[
+            ListTile(
+              leading: const Icon(
+                  Icons.logout
+              ),
+              title: const Text('Abmelden'),
+              onTap: () {
+                authData.logout();
+                AutoRouter.of(context).push(const HomeRoute());
+              },
+            ),
+          ]
+          else...[
+            ListTile(
+              leading: const Icon(
+                  Icons.login
+              ),
+              title: const Text('Anmelden'),
+              onTap: () {
+                AutoRouter.of(context).push(LoginRoute());
+              },
+            ),
+          ]
         ],
       ),
     );
+    });
   }
 }
