@@ -25,8 +25,10 @@ class QrCode extends StatefulWidget {
 class _QrCodeState extends State<QrCode> {
   @override
   Widget build(BuildContext context) {
-    String formattedStartSemesterTicket = DateFormat('dd.MM.yyyy').format(widget.startSemesterTicket);
-    String formattedEndSemesterTicket = DateFormat('dd.MM.yyyy').format(widget.endSemesterTicket);
+    String formattedStartSemesterTicket =
+        DateFormat('dd.MM.yyyy').format(widget.startSemesterTicket);
+    String formattedEndSemesterTicket =
+        DateFormat('dd.MM.yyyy').format(widget.endSemesterTicket);
 
     return QrImageView(
       data: 'Vorname: ${widget.firstName}, '

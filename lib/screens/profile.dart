@@ -15,7 +15,7 @@ class UserProfile extends StatelessWidget {
   final String lastName = "Block";
   final String userName = "pascalblock";
   final String password = "123456";
-  final String degree = "Maser";
+  final String degree = "Master";
   final int currentSemester = 3;
   final int matriculationNumber = 123456;
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
