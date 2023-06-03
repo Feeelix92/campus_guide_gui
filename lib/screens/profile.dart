@@ -229,7 +229,10 @@ class _TopPortion extends StatelessWidget {
                       const SizedBox(width: 8),
                       FilledButton(
                         child: const Text('Speichern'),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => {
+                          ImageUpload.triggerFunction(),
+                          Navigator.pop(context)
+                        },
                       ),
                     ],
                   ),
