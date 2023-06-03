@@ -2,7 +2,14 @@ import '../widgets/qr_code.dart';
 import 'package:flutter/material.dart';
 
 class StudentID extends StatefulWidget {
-  StudentID({Key? key, required this.firstName, required this.lastName, required this.matriculationNumber, required this.startSemesterTicket, required this.endSemesterTicket}) : super(key: key);
+  StudentID(
+      {Key? key,
+      required this.firstName,
+      required this.lastName,
+      required this.matriculationNumber,
+      required this.startSemesterTicket,
+      required this.endSemesterTicket})
+      : super(key: key);
 
   final String firstName;
   final String lastName;
@@ -35,9 +42,7 @@ class _StudentIDState extends State<StudentID> {
               lastName: widget.lastName,
               matriculationNumber: widget.matriculationNumber,
               startSemesterTicket: widget.startSemesterTicket,
-              endSemesterTicket: widget.endSemesterTicket
-          )
-      )
+              endSemesterTicket: widget.endSemesterTicket))
     ]);
   }
 }

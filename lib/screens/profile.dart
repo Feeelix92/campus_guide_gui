@@ -21,7 +21,6 @@ class UserProfile extends StatelessWidget {
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +44,11 @@ class UserProfile extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               StudentID(
-                firstName: firstName,
-                lastName: lastName,
-                matriculationNumber: matriculationNumber,
-                startSemesterTicket: startSemesterTicket,
-                endSemesterTicket: endSemesterTicket
-              )
+                  firstName: firstName,
+                  lastName: lastName,
+                  matriculationNumber: matriculationNumber,
+                  startSemesterTicket: startSemesterTicket,
+                  endSemesterTicket: endSemesterTicket)
             ],
           ),
         ),
@@ -67,7 +65,12 @@ class ProfileInfoItem {
 }
 
 class _ProfileInfoRow extends StatelessWidget {
-  _ProfileInfoRow({Key? key, required this.matriculationNumber, required this.degree, required this.currentSemester}) : super(key: key);
+  _ProfileInfoRow(
+      {Key? key,
+      required this.matriculationNumber,
+      required this.degree,
+      required this.currentSemester})
+      : super(key: key);
 
   final int matriculationNumber;
   final String degree;
@@ -96,8 +99,7 @@ class _ProfileInfoRow extends StatelessWidget {
                     if (_items.indexOf(item) != 0) const VerticalDivider(),
                     Expanded(child: _singleItem(context, item)),
                   ],
-                )
-        ))
+                )))
             .toList(),
       ),
     );
@@ -125,7 +127,8 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key, required this.userName, required this.password}) : super(key: key);
+  _TopPortion({Key? key, required this.userName, required this.password})
+      : super(key: key);
 
   String userImage = "";
   final String userName;
@@ -215,7 +218,6 @@ class _TopPortion extends StatelessWidget {
                       labelText: 'Passwort',
                     ),
                     obscureText: true,
-
                   ),
                   const SizedBox(height: 8),
                   Row(

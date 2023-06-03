@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:intl/intl.dart';
-
 
 class QrCode extends StatefulWidget {
   const QrCode(
@@ -35,8 +33,7 @@ class _QrCodeState extends State<QrCode> {
       version: QrVersions.auto,
       size: 200.0,
       dataModuleStyle: const QrDataModuleStyle(
-          dataModuleShape: QrDataModuleShape.circle, color: Colors.green
-      ),
+          dataModuleShape: QrDataModuleShape.circle, color: Colors.green),
       eyeStyle:
           const QrEyeStyle(eyeShape: QrEyeShape.circle, color: Colors.green),
     );
