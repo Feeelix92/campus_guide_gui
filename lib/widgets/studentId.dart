@@ -2,13 +2,13 @@ import '../widgets/qr_code.dart';
 import 'package:flutter/material.dart';
 
 class StudentID extends StatefulWidget {
-  StudentID({Key? key}) : super(key: key);
+  StudentID({Key? key, required this.firstName, required this.lastName, required this.matriculationNumber, required this.startSemesterTicket, required this.endSemesterTicket}) : super(key: key);
 
-  final String firstName = "Pascal";
-  final String lastName = "Block";
-  final int matriculationNumber = 123456;
-  final DateTime startSemesterTicket = DateTime(2023, 09, 30);
-  final DateTime endSemesterTicket = DateTime(2022, 10, 01);
+  final String firstName;
+  final String lastName;
+  final int matriculationNumber;
+  final DateTime startSemesterTicket;
+  final DateTime endSemesterTicket;
   bool _studentIdIsVisible = false;
 
   @override
@@ -35,7 +35,9 @@ class _StudentIDState extends State<StudentID> {
               lastName: widget.lastName,
               matriculationNumber: widget.matriculationNumber,
               startSemesterTicket: widget.startSemesterTicket,
-              endSemesterTicket: widget.endSemesterTicket))
+              endSemesterTicket: widget.endSemesterTicket
+          )
+      )
     ]);
   }
 }
