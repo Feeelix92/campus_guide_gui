@@ -1,15 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/appDrawer.dart';
-import '../widgets/customAppBar.dart';
 import '../widgets/studentId.dart';
 import '../widgets/h2.dart';
 
-class UserProfile extends StatelessWidget {
-  UserProfile({Key? key}) : super(key: key);
+import '../widgets/appDrawer.dart';
+import '../widgets/customAppBar.dart';
+
+@RoutePage()
+class UserProfileScreen extends StatelessWidget {
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   final String firstName = "Pascal";
   final String lastName = "Block";

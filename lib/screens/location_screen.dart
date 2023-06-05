@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
 import '../widgets/h2.dart';
 
-class News extends StatelessWidget {
-  const News({Key? key}) : super(key: key);
+@RoutePage()
+class LocationScreen extends StatelessWidget {
+  const LocationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class News extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Nachrichten Page'),
+            H1(text: 'Location Page'),
           ],
         ),
       ),
