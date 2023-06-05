@@ -7,6 +7,11 @@ import 'package:image_picker/image_picker.dart';
 class ImageUpload extends StatefulWidget {
   const ImageUpload({Key? key}) : super(key: key);
 
+  static void triggerFunction() {
+    //TODO hier die Upload-API einbinden
+    print('Upload');
+  }
+
   @override
   State<ImageUpload> createState() => _ImageUploadState();
 }

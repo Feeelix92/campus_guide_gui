@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
+import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
 import '../widgets/studentId.dart';
@@ -14,6 +15,13 @@ class UserProfileScreen extends StatelessWidget {
 
   final String firstName = "Pascal";
   final String lastName = "Block";
+  final String userName = "pascalblock";
+  final String password = "123456";
+  final String degree = "Master";
+  final int currentSemester = 3;
+  final int matriculationNumber = 123456;
+  final DateTime startSemesterTicket = DateTime(2023, 09, 30);
+  final DateTime endSemesterTicket = DateTime(2022, 10, 01);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +32,25 @@ class UserProfileScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              _TopPortion(),
+              _TopPortion(
+                userName: userName,
+                password: password,
+              ),
               H1(text: '$firstName $lastName'),
+              H3(text: '@$userName'),
               const SizedBox(height: 16),
-              const _ProfileInfoRow(),
+              _ProfileInfoRow(
+                matriculationNumber: matriculationNumber,
+                degree: degree,
+                currentSemester: currentSemester,
+              ),
               const SizedBox(height: 16),
-              StudentID()
+              StudentID(
+                  firstName: firstName,
+                  lastName: lastName,
+                  matriculationNumber: matriculationNumber,
+                  startSemesterTicket: startSemesterTicket,
+                  endSemesterTicket: endSemesterTicket)
             ],
           ),
         ),
@@ -40,22 +61,34 @@ class UserProfileScreen extends StatelessWidget {
 
 class ProfileInfoItem {
   final String title;
-  final String value;
+  late String value;
 
-  const ProfileInfoItem(this.title, this.value);
+  ProfileInfoItem(this.title, this.value);
 }
 
 class _ProfileInfoRow extends StatelessWidget {
-  const _ProfileInfoRow({Key? key}) : super(key: key);
+  _ProfileInfoRow(
+      {Key? key,
+      required this.matriculationNumber,
+      required this.degree,
+      required this.currentSemester})
+      : super(key: key);
 
-  final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("Matrikelnummer", "123456"),
-    ProfileInfoItem("Abschluss", "Master"),
-    ProfileInfoItem("Semester", "3")
+  final int matriculationNumber;
+  final String degree;
+  final int currentSemester;
+  final List<ProfileInfoItem> _items = [
+    ProfileInfoItem("Matrikelnummer", ''),
+    ProfileInfoItem("Abschluss", ''),
+    ProfileInfoItem("Semester", '')
   ];
 
   @override
   Widget build(BuildContext context) {
+    _items[0].value = '$matriculationNumber';
+    _items[1].value = degree;
+    _items[2].value = '$currentSemester';
+
     return Container(
       height: 80,
       constraints: const BoxConstraints(maxWidth: 450),
@@ -96,11 +129,13 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key}) : super(key: key);
+  _TopPortion({Key? key, required this.userName, required this.password})
+      : super(key: key);
 
   String userImage = "";
+  final String userName;
+  final String password;
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -154,6 +189,9 @@ class _TopPortion extends StatelessWidget {
   }
 
   Future<void> _dialogBuilder(BuildContext context) async {
+    _usernameController.text = userName;
+    _passwordController.text = password;
+
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -162,7 +200,7 @@ class _TopPortion extends StatelessWidget {
           height: 700,
           child: Center(
             child: Container(
-              margin: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -175,14 +213,7 @@ class _TopPortion extends StatelessWidget {
                       labelText: 'Benutzername',
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'E-Mail',
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   TextField(
                     controller: _passwordController,
                     decoration: const InputDecoration(
@@ -190,28 +221,24 @@ class _TopPortion extends StatelessWidget {
                     ),
                     obscureText: true,
                   ),
-                  TextField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      labelText: 'Passwort wiederholen',
-                    ),
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
                           onPressed: () => Navigator.pop(context),
                           child: const Text('Abbrechen')),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 8),
                       FilledButton(
                         child: const Text('Speichern'),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => {
+                          ImageUpload.triggerFunction(),
+                          Navigator.pop(context)
+                        },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10)
+                  const SizedBox(height: 8)
                 ],
               ),
             ),
