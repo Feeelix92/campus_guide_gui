@@ -67,6 +67,9 @@ class Auth with ChangeNotifier {
             "username": username,
             "email": email,
             "password": password,
+            "roles": (
+              "string"
+            )
           }));
       if (response.statusCode == 403) {
         print('403 Error');

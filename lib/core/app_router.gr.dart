@@ -58,7 +58,7 @@ abstract class $AppRouter extends _i8.RootStackRouter {
     UserProfileRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.UserProfileScreen(),
+        child:  _i6.UserProfileScreen(),
       );
     },
     RegistrationRoute.name: (routeData) {
