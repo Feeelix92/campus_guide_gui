@@ -3,6 +3,7 @@ import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
+import '../core/profile.dart';
 import '../widgets/studentId.dart';
 import '../widgets/h2.dart';
 
@@ -22,6 +23,12 @@ class UserProfileScreen extends StatelessWidget {
   final int matriculationNumber = 123456;
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
+
+  Future<void> createProfileHandler() async {
+    final profile = Profile();
+    await profile.createProfile(firstName);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,13 @@ class UserProfileScreen extends StatelessWidget {
                 matriculationNumber: matriculationNumber,
                 degree: degree,
                 currentSemester: currentSemester,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                  onPressed: () {
+                    createProfileHandler();
+                  },
+                  child: const Text('Moin moin')
               ),
               const SizedBox(height: 16),
               StudentID(
