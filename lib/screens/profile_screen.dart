@@ -11,7 +11,7 @@ import '../widgets/customAppBar.dart';
 
 @RoutePage()
 class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen({Key? key}) : super(key: key);
+  UserProfileScreen({Key? key}) : super(key: key);
 
   final String firstName = "Pascal";
   final String lastName = "Block";
