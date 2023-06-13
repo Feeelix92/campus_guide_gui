@@ -36,12 +36,12 @@ class Profile with ChangeNotifier {
             'Authorization': 'Bearer $bearerToken'
           },
           body: jsonEncode(<String, String>{
-            "id": "5",
+            "id": "10101010",
             "image": "string",
             "firstname": firstname,
-            "lastname": "string3",
-            "email": "string",
-            "phone": "+47 4 1 303 2"
+            "lastname": "string1",
+            "email": "string5",
+            "phone": "+47 4 1 303 3"
       }));
 
       if(response.statusCode == 200) {

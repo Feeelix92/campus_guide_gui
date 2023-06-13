@@ -41,13 +41,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
 
-  /*
+
   Future<void> createProfileHandler() async {
     final profile = Profile();
-    // await profile.createProfile(firstName);
-    await profile.getProfileData();
+    await profile.createProfile(firstName);
+    //await profile.getProfileData();
   }
-   */
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             future: profileDataFuture,
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                  ],
+                );
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else if (snapshot.hasData) {
@@ -68,7 +74,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 return Column(
                   children: [
                     _TopPortion(
-                      userName: userName,
+                      userName: profileData.firstname!,
                       password: password,
                     ),
                     H1(text: '${profileData.firstname} ${profileData.lastname}'),
@@ -80,12 +86,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       currentSemester: currentSemester,
                     ),
                     const SizedBox(height: 16),
-                    /* ElevatedButton(
+                    ElevatedButton(
                   onPressed: () {
                     createProfileHandler();
                   },
                   child: const Text('Moin moin')
-              ),*/
+              ),
                     const SizedBox(height: 16),
                     StudentID(
                         firstName: profileData.firstname!,
