@@ -30,7 +30,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     profileDataFuture = profile.getProfileData();
   }
 
-
   final String firstName = "Pascal";
   final String lastName = "Block";
   final String userName = "pascalblock";
@@ -41,11 +40,19 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
 
-
+  /*
   Future<void> createProfileHandler() async {
     final profile = Profile();
     //await profile.createProfile(firstName);
     //await profile.getProfileData();
+  }
+   */
+
+  void _createProfileHandler() {
+    final profile = Profile();
+    setState(() {
+      profileDataFuture = profile.getProfileData();
+    });
   }
 
   @override
@@ -76,7 +83,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       firstname: profileData.firstname!,
                       lastname: profileData.lastname!,
                       phone: profileData.phone!,
-                      email: profileData.email!
+                      email: profileData.email!,
+                      loadNewData: _createProfileHandler
                     ),
                     H1(text: '${profileData.firstname} ${profileData.lastname}'),
                     H3(text: '@${profileData.email}'),
@@ -87,12 +95,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       currentSemester: currentSemester,
                     ),
                     const SizedBox(height: 16),
-                    /*ElevatedButton(
+                    ElevatedButton(
                   onPressed: () {
-                    createProfileHandler();
+                    _createProfileHandler();
                   },
                   child: const Text('Moin moin')
-              ),*/
+              ),
                     const SizedBox(height: 16),
                     StudentID(
                         firstName: profileData.firstname!,
@@ -185,7 +193,7 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key, required this.firstname, required this.lastname, required this.email, required this.phone})
+  _TopPortion({Key? key, required this.firstname, required this.lastname, required this.email, required this.phone, required this.loadNewData})
       : super(key: key);
 
   String userImage = "";
@@ -193,6 +201,8 @@ class _TopPortion extends StatelessWidget {
   String lastname;
   String email;
   String phone;
+
+  final VoidCallback loadNewData;
 
   final TextEditingController _firstnameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
@@ -319,37 +329,17 @@ class _TopPortion extends StatelessWidget {
                           phone = _phoneController.text,
 
                           ImageUpload.triggerFunction(),
-                          if(firstname.isNotEmpty && lastname.isNotEmpty && email.isNotEmpty &&
-                              phone.isNotEmpty) {
+
                             firstname, lastname,
                       email,
                       phone,
-
                             editProfileHandler(
                                 firstname,
                                 lastname,
                                 email,
                                 phone
                             ),
-                          }else {
-                        showDialog(
-                        context: context,
-                        builder: (context) =>
-                            AlertDialog(
-                              title: const Text('Fehler'),
-                              content: const Text(
-                                  'Bitte füllen Sie alle Felder aus.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
-                      )
-        },
+                          loadNewData,
                           Navigator.pop(context)
                         },
                       ),
