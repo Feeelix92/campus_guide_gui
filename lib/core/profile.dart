@@ -17,7 +17,7 @@ class Profile with ChangeNotifier {
     token = prefs.getString('token');
   }*/
 
-  Future<void> createProfile(String firstname) async {
+  Future<void> createProfile(String firstname,String lastname, String email, String phone) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -36,12 +36,12 @@ class Profile with ChangeNotifier {
             'Authorization': 'Bearer $bearerToken'
           },
           body: jsonEncode(<String, String>{
-            "id": "10101010",
+            "id": "1",
             "image": "string",
             "firstname": firstname,
-            "lastname": "string1",
-            "email": "string5",
-            "phone": "+47 4 1 303 3"
+            "lastname": lastname,
+            "email": email,
+            "phone": phone
       }));
 
       if(response.statusCode == 200) {

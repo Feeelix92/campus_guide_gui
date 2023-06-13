@@ -44,7 +44,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   Future<void> createProfileHandler() async {
     final profile = Profile();
-    await profile.createProfile(firstName);
+    //await profile.createProfile(firstName);
     //await profile.getProfileData();
   }
 
@@ -86,12 +86,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       currentSemester: currentSemester,
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton(
+                    /*ElevatedButton(
                   onPressed: () {
                     createProfileHandler();
                   },
                   child: const Text('Moin moin')
-              ),
+              ),*/
                     const SizedBox(height: 16),
                     StudentID(
                         firstName: profileData.firstname!,
