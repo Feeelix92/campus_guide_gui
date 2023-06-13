@@ -86,4 +86,42 @@ class Profile with ChangeNotifier {
     }
     return null;
   }
+
+  Future<void> editProfileData(String firstname,String lastname, String email, String phone) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9005';
+    var url = '$baseURL/api/v1/profile';
+    var bearerToken = token!;
+    print(token);
+
+    try {
+      var response = await http.put(Uri.parse(url),
+          headers: <String, String>{
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'Authorization': 'Bearer $bearerToken'
+          },
+          body: jsonEncode(<String, String>{
+            "id": "1",
+            "image": "string",
+            "firstname": firstname,
+            "lastname": lastname,
+            "email": email,
+            "phone": phone
+          }));
+
+      if(response.statusCode == 200) {
+        print('Response from Update: ${response.body}');
+      } else if (response.statusCode == 403) {
+        print('403 Error');
+      } else{
+        print('mies ${response.statusCode}');
+      }
+    }  catch (e) {
+      throw Exception('ERROR $e');
+    }
+  }
 }

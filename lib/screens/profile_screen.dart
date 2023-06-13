@@ -48,7 +48,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     //await profile.getProfileData();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,8 +73,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 return Column(
                   children: [
                     _TopPortion(
-                      userName: profileData.firstname!,
-                      password: password,
+                      firstname: profileData.firstname!,
+                      lastname: profileData.lastname!,
+                      phone: profileData.phone!,
+                      email: profileData.email!
                     ),
                     H1(text: '${profileData.firstname} ${profileData.lastname}'),
                     H3(text: '@${profileData.email}'),
@@ -184,14 +185,24 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key, required this.userName, required this.password})
+  _TopPortion({Key? key, required this.firstname, required this.lastname, required this.email, required this.phone})
       : super(key: key);
 
   String userImage = "";
-  final String userName;
-  final String password;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  String firstname;
+  String lastname;
+  String email;
+  String phone;
+
+  final TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  Future<void> editProfileHandler(firstname, lastname, email, phone) async {
+    final profile = Profile();
+    await profile.editProfileData(firstname, lastname, email, phone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +255,10 @@ class _TopPortion extends StatelessWidget {
   }
 
   Future<void> _dialogBuilder(BuildContext context) async {
-    _usernameController.text = userName;
-    _passwordController.text = password;
+    _firstnameController.text = firstname;
+    _lastnameController.text = lastname;
+    _emailController.text = email;
+    _phoneController.text = phone;
 
     showModalBottomSheet<void>(
       context: context,
@@ -263,18 +276,31 @@ class _TopPortion extends StatelessWidget {
                   const H2(text: 'Profil bearbeiten'),
                   const ImageUpload(),
                   TextField(
-                    controller: _usernameController,
+                    controller: _firstnameController,
                     decoration: const InputDecoration(
-                      labelText: 'Benutzername',
+                      labelText: 'Vorname',
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextField(
-                    controller: _passwordController,
+                    controller: _lastnameController,
                     decoration: const InputDecoration(
-                      labelText: 'Passwort',
+                      labelText: 'Nachname',
                     ),
-                    obscureText: true,
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'E-Mail',
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nachname',
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -287,7 +313,43 @@ class _TopPortion extends StatelessWidget {
                       FilledButton(
                         child: const Text('Speichern'),
                         onPressed: () => {
+                          firstname = _firstnameController.text,
+                          lastname = _lastnameController.text,
+                          email = _emailController.text,
+                          phone = _phoneController.text,
+
                           ImageUpload.triggerFunction(),
+                          if(firstname.isNotEmpty && lastname.isNotEmpty && email.isNotEmpty &&
+                              phone.isNotEmpty) {
+                            firstname, lastname,
+                      email,
+                      phone,
+
+                            editProfileHandler(
+                                firstname,
+                                lastname,
+                                email,
+                                phone
+                            ),
+                          }else {
+                        showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDialog(
+                              title: const Text('Fehler'),
+                              content: const Text(
+                                  'Bitte füllen Sie alle Felder aus.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                      )
+        },
                           Navigator.pop(context)
                         },
                       ),
