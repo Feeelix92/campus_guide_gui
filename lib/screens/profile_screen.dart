@@ -4,6 +4,7 @@ import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
 import '../core/profile.dart';
+import '../model/profile_data.dart';
 import '../widgets/studentId.dart';
 import '../widgets/h2.dart';
 
@@ -11,8 +12,24 @@ import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 
 @RoutePage()
-class UserProfileScreen extends StatelessWidget {
-  UserProfileScreen({Key? key}) : super(key: key);
+class UserProfileScreen extends StatefulWidget {
+  const UserProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  late Future<ProfileData?> profileDataFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    final profile = Profile();
+    profileDataFuture = profile.getProfileData();
+  }
+
 
   final String firstName = "Pascal";
   final String lastName = "Block";
@@ -24,12 +41,13 @@ class UserProfileScreen extends StatelessWidget {
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
 
+  /*
   Future<void> createProfileHandler() async {
     final profile = Profile();
     // await profile.createProfile(firstName);
     await profile.getProfileData();
   }
-
+   */
 
   @override
   Widget build(BuildContext context) {
@@ -38,36 +56,52 @@ class UserProfileScreen extends StatelessWidget {
       drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: [
-              _TopPortion(
-                userName: userName,
-                password: password,
-              ),
-              H1(text: '$firstName $lastName'),
-              H3(text: '@$userName'),
-              const SizedBox(height: 16),
-              _ProfileInfoRow(
-                matriculationNumber: matriculationNumber,
-                degree: degree,
-                currentSemester: currentSemester,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
+          child: FutureBuilder<ProfileData?>(
+            future: profileDataFuture,
+            builder: (context, snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                var profileData = snapshot.data!;
+                return Column(
+                  children: [
+                    _TopPortion(
+                      userName: userName,
+                      password: password,
+                    ),
+                    H1(text: '${profileData.firstname} ${profileData.lastname}'),
+                    H3(text: '@${profileData.email}'),
+                    const SizedBox(height: 16),
+                    _ProfileInfoRow(
+                      matriculationNumber: matriculationNumber,
+                      degree: degree,
+                      currentSemester: currentSemester,
+                    ),
+                    const SizedBox(height: 16),
+                    /* ElevatedButton(
                   onPressed: () {
                     createProfileHandler();
                   },
                   child: const Text('Moin moin')
-              ),
-              const SizedBox(height: 16),
-              StudentID(
-                  firstName: firstName,
-                  lastName: lastName,
-                  matriculationNumber: matriculationNumber,
-                  startSemesterTicket: startSemesterTicket,
-                  endSemesterTicket: endSemesterTicket)
-            ],
-          ),
+              ),*/
+                    const SizedBox(height: 16),
+                    StudentID(
+                        firstName: profileData.firstname!,
+                        lastName: profileData.lastname!,
+                        matriculationNumber: matriculationNumber,
+                        startSemesterTicket: startSemesterTicket,
+                        endSemesterTicket: endSemesterTicket
+                    )
+                  ],
+                );
+              }
+              else {
+                return const Text('Ein Fehler ist aufgetreten');
+              }
+            },
+        )
         ),
       ),
     );

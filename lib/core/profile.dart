@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:campus_guide_gui/model/profile_data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,7 +56,7 @@ class Profile with ChangeNotifier {
     }
   }
 
-  Future<void> getProfileData() async {
+  Future<ProfileData?> getProfileData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -74,6 +75,7 @@ class Profile with ChangeNotifier {
           });
       if(response.statusCode == 200) {
         print('Response from Registration: ${response.body}');
+        return ProfileData.fromJSON(jsonDecode(response.body));
       } else if (response.statusCode == 403) {
         print('403 Error');
       } else{
@@ -82,5 +84,6 @@ class Profile with ChangeNotifier {
     }  catch (e) {
       throw Exception('ERROR $e');
     }
+    return null;
   }
 }
