@@ -26,7 +26,8 @@ class UserProfileScreen extends StatelessWidget {
 
   Future<void> createProfileHandler() async {
     final profile = Profile();
-    await profile.createProfile(firstName);
+    // await profile.createProfile(firstName);
+    await profile.getProfileData();
   }
 
 

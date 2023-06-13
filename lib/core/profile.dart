@@ -32,7 +32,7 @@ class Profile with ChangeNotifier {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
             'Accept': '*/*',
-            'bearer': bearerToken
+            'Authorization': 'Bearer $bearerToken'
           },
           body: jsonEncode(<String, String>{
             "id": "5",
@@ -49,6 +49,35 @@ class Profile with ChangeNotifier {
         print('403 Error');
       } else{
         print('mies ${response.statusCode}');
+      }
+    }  catch (e) {
+      throw Exception('ERROR $e');
+    }
+  }
+
+  Future<void> getProfileData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9005';
+    var url = '$baseURL/api/v1/profile';
+    var bearerToken = token!;
+    print(token);
+
+    try {
+      var response = await http.get(Uri.parse(url),
+          headers: <String, String>{
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'Authorization': 'Bearer $bearerToken'
+          });
+      if(response.statusCode == 200) {
+        print('Response from Registration: ${response.body}');
+      } else if (response.statusCode == 403) {
+        print('403 Error');
+      } else{
+        print('${response.statusCode}');
       }
     }  catch (e) {
       throw Exception('ERROR $e');
