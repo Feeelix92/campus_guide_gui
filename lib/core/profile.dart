@@ -17,7 +17,8 @@ class Profile with ChangeNotifier {
     token = prefs.getString('token');
   }*/
 
-  Future<void> createProfile(String firstname,String lastname, String email, String phone) async {
+  Future<void> createProfile(
+      String firstname, String lastname, String email, String phone) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -42,16 +43,16 @@ class Profile with ChangeNotifier {
             "lastname": lastname,
             "email": email,
             "phone": phone
-      }));
+          }));
 
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         print('Response from Registration: ${response.body}');
       } else if (response.statusCode == 403) {
         print('403 Error');
-      } else{
+      } else {
         print('mies ${response.statusCode}');
       }
-    }  catch (e) {
+    } catch (e) {
       throw Exception('ERROR $e');
     }
   }
@@ -66,28 +67,28 @@ class Profile with ChangeNotifier {
     print(token);
 
     try {
-      var response = await http.get(Uri.parse(url),
-          headers: <String, String>{
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-            'Authorization': 'Bearer $bearerToken'
-          });
-      if(response.statusCode == 200) {
+      var response = await http.get(Uri.parse(url), headers: <String, String>{
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $bearerToken'
+      });
+      if (response.statusCode == 200) {
         print('Response from Registration: ${response.body}');
         return ProfileData.fromJSON(jsonDecode(response.body));
       } else if (response.statusCode == 403) {
         print('403 Error');
-      } else{
+      } else {
         print('${response.statusCode}');
       }
-    }  catch (e) {
+    } catch (e) {
       throw Exception('ERROR $e');
     }
     return null;
   }
 
-  Future<void> editProfileData(String firstname,String lastname, String email, String phone) async {
+  Future<void> editProfileData(
+      String firstname, String lastname, String email, String phone) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -113,14 +114,14 @@ class Profile with ChangeNotifier {
             "phone": phone
           }));
 
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         print('Response from Update: ${response.body}');
       } else if (response.statusCode == 403) {
         print('403 Error');
-      } else{
+      } else {
         print('mies ${response.statusCode}');
       }
-    }  catch (e) {
+    } catch (e) {
       throw Exception('ERROR $e');
     }
   }

@@ -17,7 +17,6 @@ class UserProfileScreen extends StatefulWidget {
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
-
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
@@ -62,62 +61,57 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Center(
-          child: FutureBuilder<ProfileData?>(
-            future: profileDataFuture,
-            builder: (context, snapshot) {
-              if(snapshot.connectionState == ConnectionState.waiting) {
-                return const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else if (snapshot.hasData) {
-                var profileData = snapshot.data!;
-                return Column(
-                  children: [
-                    _TopPortion(
+            child: FutureBuilder<ProfileData?>(
+          future: profileDataFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (snapshot.hasData) {
+              var profileData = snapshot.data!;
+              return Column(
+                children: [
+                  _TopPortion(
                       firstname: profileData.firstname!,
                       lastname: profileData.lastname!,
                       phone: profileData.phone!,
                       email: profileData.email!,
-                      loadNewData: _createProfileHandler
-                    ),
-                    H1(text: '${profileData.firstname} ${profileData.lastname}'),
-                    H3(text: '@${profileData.email}'),
-                    const SizedBox(height: 16),
-                    _ProfileInfoRow(
+                      loadNewData: _createProfileHandler),
+                  H1(text: '${profileData.firstname} ${profileData.lastname}'),
+                  H3(text: '@${profileData.email}'),
+                  const SizedBox(height: 16),
+                  _ProfileInfoRow(
+                    matriculationNumber: matriculationNumber,
+                    degree: degree,
+                    currentSemester: currentSemester,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                      onPressed: () {
+                        _createProfileHandler();
+                      },
+                      child: const Text('Moin moin')),
+                  const SizedBox(height: 16),
+                  StudentID(
+                      firstName: profileData.firstname!,
+                      lastName: profileData.lastname!,
                       matriculationNumber: matriculationNumber,
-                      degree: degree,
-                      currentSemester: currentSemester,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                  onPressed: () {
-                    _createProfileHandler();
-                  },
-                  child: const Text('Moin moin')
-              ),
-                    const SizedBox(height: 16),
-                    StudentID(
-                        firstName: profileData.firstname!,
-                        lastName: profileData.lastname!,
-                        matriculationNumber: matriculationNumber,
-                        startSemesterTicket: startSemesterTicket,
-                        endSemesterTicket: endSemesterTicket
-                    )
-                  ],
-                );
-              }
-              else {
-                return const Text('Ein Fehler ist aufgetreten');
-              }
-            },
-        )
-        ),
+                      startSemesterTicket: startSemesterTicket,
+                      endSemesterTicket: endSemesterTicket)
+                ],
+              );
+            } else {
+              return const Text('Ein Fehler ist aufgetreten');
+            }
+          },
+        )),
       ),
     );
   }
@@ -193,7 +187,13 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key, required this.firstname, required this.lastname, required this.email, required this.phone, required this.loadNewData})
+  _TopPortion(
+      {Key? key,
+      required this.firstname,
+      required this.lastname,
+      required this.email,
+      required this.phone,
+      required this.loadNewData})
       : super(key: key);
 
   String userImage = "";
@@ -327,18 +327,12 @@ class _TopPortion extends StatelessWidget {
                           lastname = _lastnameController.text,
                           email = _emailController.text,
                           phone = _phoneController.text,
-
                           ImageUpload.triggerFunction(),
-
-                            firstname, lastname,
-                      email,
-                      phone,
-                            editProfileHandler(
-                                firstname,
-                                lastname,
-                                email,
-                                phone
-                            ),
+                          firstname,
+                          lastname,
+                          email,
+                          phone,
+                          editProfileHandler(firstname, lastname, email, phone),
                           loadNewData,
                           Navigator.pop(context)
                         },

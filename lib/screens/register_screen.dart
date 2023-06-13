@@ -28,10 +28,7 @@ class RegistrationScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 3,
+              width: MediaQuery.of(context).size.width / 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -86,13 +83,18 @@ class RegistrationScreen extends StatelessWidget {
                       String firstname = _firstnameController.text;
                       String lastname = _lastnameController.text;
                       String email = _emailController.text;
-                      String phonenumber = _phoneController.text;
+                      String phone = _phoneController.text;
                       String password = _passwordController.text;
 
                       // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
-                      if (username.isNotEmpty && firstname.isNotEmpty && lastname.isNotEmpty && email.isNotEmpty &&
-                          phonenumber.isNotEmpty && password.isNotEmpty) {
-                        authData.register(username, firstname, lastname, email, phonenumber, password);
+                      if (username.isNotEmpty &&
+                          firstname.isNotEmpty &&
+                          lastname.isNotEmpty &&
+                          email.isNotEmpty &&
+                          phone.isNotEmpty &&
+                          password.isNotEmpty) {
+                        authData.register(username, firstname, lastname, email,
+                            phone, password);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -102,20 +104,19 @@ class RegistrationScreen extends StatelessWidget {
                       } else {
                         showDialog(
                           context: context,
-                          builder: (context) =>
-                              AlertDialog(
-                                title: const Text('Fehler'),
-                                content: const Text(
-                                    'Bitte füllen Sie alle Felder aus.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
+                          builder: (context) => AlertDialog(
+                            title: const Text('Fehler'),
+                            content:
+                                const Text('Bitte füllen Sie alle Felder aus.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('OK'),
                               ),
+                            ],
+                          ),
                         );
                       }
                     },

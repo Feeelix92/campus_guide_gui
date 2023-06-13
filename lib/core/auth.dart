@@ -59,7 +59,7 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> register(String username,String firstname, String lastname, String password, String phonenumber, String email) async {
+  Future<void> register(String username,String firstname, String lastname, String password, String phone, String email) async {
     var baseURL = 'http://localhost:8080';
     var url = '$baseURL/api/v1/auth/register';
     print(url);
@@ -85,7 +85,7 @@ class Auth with ChangeNotifier {
         if (isAuth) {
           prefs.setString('token', token!);
           prefs.setBool('isAuth', isAuth);
-          profile.createProfile(firstname, lastname, email, phonenumber);
+          profile.createProfile(firstname, lastname, email, phone);
         }
       }
     } catch (e) {
