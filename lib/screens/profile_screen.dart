@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:campus_guide_gui/widgets/h3.dart';
@@ -49,8 +51,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   void _createProfileHandler() {
     final profile = Profile();
-    setState(() {
-      profileDataFuture = profile.getProfileData();
+    Timer(const Duration(milliseconds: 200), () {
+      setState(() {
+        profileDataFuture = profile.getProfileData();
+      });
     });
   }
 
@@ -65,12 +69,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           future: profileDataFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                ],
+              return const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                  ],
+                ),
               );
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -83,7 +89,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       lastname: profileData.lastname!,
                       phone: profileData.phone!,
                       email: profileData.email!,
-                      loadNewData: _createProfileHandler),
+                      loadNewData: _createProfileHandler
+                  ),
                   H1(text: '${profileData.firstname} ${profileData.lastname}'),
                   H3(text: '@${profileData.email}'),
                   const SizedBox(height: 16),
@@ -333,7 +340,7 @@ class _TopPortion extends StatelessWidget {
                           email,
                           phone,
                           editProfileHandler(firstname, lastname, email, phone),
-                          loadNewData,
+                          loadNewData(),
                           Navigator.pop(context)
                         },
                       ),
