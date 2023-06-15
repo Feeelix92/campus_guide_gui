@@ -7,16 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Profile with ChangeNotifier {
   String? token;
 
-  /*bool get isAuth {
-    authToken;
-    return token != null;
-  }
-
-  get authToken async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString('token');
-  }*/
-
   Future<void> createProfile(
       String firstname, String lastname, String email, String phone) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -25,8 +15,6 @@ class Profile with ChangeNotifier {
     var baseURL = 'http://localhost:9005';
     var url = '$baseURL/api/v1/profile';
     var bearerToken = token!;
-
-    print(token);
 
     try {
       var response = await http.post(Uri.parse(url),
@@ -64,7 +52,6 @@ class Profile with ChangeNotifier {
     var baseURL = 'http://localhost:9005';
     var url = '$baseURL/api/v1/profile';
     var bearerToken = token!;
-    print(token);
 
     try {
       var response = await http.get(Uri.parse(url), headers: <String, String>{
@@ -74,7 +61,7 @@ class Profile with ChangeNotifier {
         'Authorization': 'Bearer $bearerToken'
       });
       if (response.statusCode == 200) {
-        print('Response from Registration: ${response.body}');
+        print('Response from Get: ${response.body}');
         return ProfileData.fromJSON(jsonDecode(response.body));
       } else if (response.statusCode == 403) {
         print('403 Error');
@@ -95,7 +82,6 @@ class Profile with ChangeNotifier {
     var baseURL = 'http://localhost:9005';
     var url = '$baseURL/api/v1/profile';
     var bearerToken = token!;
-    print(token);
 
     try {
       var response = await http.put(Uri.parse(url),

@@ -49,7 +49,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
    */
 
-  void _createProfileHandler() {
+  void _getUpdatedProfileDataHandler() {
     final profile = Profile();
     Timer(const Duration(milliseconds: 200), () {
       setState(() {
@@ -89,7 +89,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       lastname: profileData.lastname!,
                       phone: profileData.phone!,
                       email: profileData.email!,
-                      loadNewData: _createProfileHandler
+                      loadNewData: _getUpdatedProfileDataHandler
                   ),
                   H1(text: '${profileData.firstname} ${profileData.lastname}'),
                   H3(text: '@${profileData.email}'),
@@ -99,12 +99,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     degree: degree,
                     currentSemester: currentSemester,
                   ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                      onPressed: () {
-                        _createProfileHandler();
-                      },
-                      child: const Text('Moin moin')),
                   const SizedBox(height: 16),
                   StudentID(
                       firstName: profileData.firstname!,
