@@ -5,6 +5,9 @@ import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../core/app_router.gr.dart';
+import '../core/auth.dart';
 import '../core/profile.dart';
 import '../model/profile_data.dart';
 import '../widgets/studentId.dart';
@@ -40,7 +43,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   final int matriculationNumber = 123456;
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
-
+  final profile = Profile();
   /*
   Future<void> createProfileHandler() async {
     final profile = Profile();
@@ -50,7 +53,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
    */
 
   void _getUpdatedProfileDataHandler() {
-    final profile = Profile();
+
     Timer(const Duration(milliseconds: 200), () {
       setState(() {
         profileDataFuture = profile.getProfileData();
@@ -60,61 +63,73 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
-      drawer: const AppDrawer(),
-      body: SingleChildScrollView(
-        child: Center(
-            child: FutureBuilder<ProfileData?>(
-          future: profileDataFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                  ],
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else if (snapshot.hasData) {
-              var profileData = snapshot.data!;
-              return Column(
-                children: [
-                  _TopPortion(
-                      firstname: profileData.firstname!,
-                      lastname: profileData.lastname!,
-                      phone: profileData.phone!,
-                      email: profileData.email!,
-                      loadNewData: _getUpdatedProfileDataHandler
-                  ),
-                  H1(text: '${profileData.firstname} ${profileData.lastname}'),
-                  H3(text: '@${profileData.email}'),
-                  const SizedBox(height: 16),
-                  _ProfileInfoRow(
-                    matriculationNumber: matriculationNumber,
-                    degree: degree,
-                    currentSemester: currentSemester,
-                  ),
-                  const SizedBox(height: 16),
-                  StudentID(
-                      firstName: profileData.firstname!,
-                      lastName: profileData.lastname!,
-                      matriculationNumber: matriculationNumber,
-                      startSemesterTicket: startSemesterTicket,
-                      endSemesterTicket: endSemesterTicket)
-                ],
-              );
-            } else {
-              return const Text('Ein Fehler ist aufgetreten');
-            }
-          },
-        )),
-      ),
-    );
+    return Consumer<Auth>(builder: (context, authData, child) {
+      return Scaffold(
+        appBar: const CustomAppBar(),
+        drawer: const AppDrawer(),
+        body: SingleChildScrollView(
+          child: Center(
+              child: FutureBuilder<ProfileData?>(
+                future: profileDataFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    var profileData = snapshot.data!;
+                    return Column(
+                      children: [
+                        _TopPortion(
+                            firstname: profileData.firstname!,
+                            lastname: profileData.lastname!,
+                            phone: profileData.phone!,
+                            email: profileData.email!,
+                            loadNewData: _getUpdatedProfileDataHandler
+                        ),
+                        H1(text: '${profileData.firstname} ${profileData
+                            .lastname}'),
+                        H3(text: '@${profileData.email}'),
+                        const SizedBox(height: 16),
+                        _ProfileInfoRow(
+                          matriculationNumber: matriculationNumber,
+                          degree: degree,
+                          currentSemester: currentSemester,
+                        ),
+                        const SizedBox(height: 16),
+                        StudentID(
+                            firstName: profileData.firstname!,
+                            lastName: profileData.lastname!,
+                            matriculationNumber: matriculationNumber,
+                            startSemesterTicket: startSemesterTicket,
+                            endSemesterTicket: endSemesterTicket
+                        ),
+                        OutlinedButton(
+                            onPressed: () {
+                              profile.deleteProfile();
+                              authData.logout();
+                              AutoRouter.of(context).push(const HomeRoute());
+                            },
+                            child: const Text('Löschen')
+                        )
+                      ],
+                    );
+                  } else {
+                    return const Text('Ein Fehler ist aufgetreten');
+                  }
+                },
+              )),
+        ),
+      );
+    });
   }
 }
 

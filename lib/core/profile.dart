@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:campus_guide_gui/model/profile_data.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -38,7 +39,7 @@ class Profile with ChangeNotifier {
       } else if (response.statusCode == 403) {
         print('403 Error');
       } else {
-        print('mies ${response.statusCode}');
+        print('${response.statusCode}');
       }
     } catch (e) {
       throw Exception('ERROR $e');
@@ -105,7 +106,36 @@ class Profile with ChangeNotifier {
       } else if (response.statusCode == 403) {
         print('403 Error');
       } else {
-        print('mies ${response.statusCode}');
+        print('${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('ERROR $e');
+    }
+  }
+
+  Future<void> deleteProfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9005';
+    var url = '$baseURL/api/v1/profile';
+    var bearerToken = token!;
+
+    try {
+      var response = await http.delete(Uri.parse(url),
+          headers: <String, String>{
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'Authorization': 'Bearer $bearerToken'
+          });
+
+      if (response.statusCode == 200) {
+        print('Deleted');
+      } else if (response.statusCode == 403) {
+        print('403 Error');
+      } else {
+        print('${response.statusCode}');
       }
     } catch (e) {
       throw Exception('ERROR $e');
