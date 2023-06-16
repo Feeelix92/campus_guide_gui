@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'app_router.gr.dart';
 import 'auth_guard.dart';
 
@@ -15,6 +16,7 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: LocationsRoute.page, path: '/locations', guards: [AuthGuard()]),
     AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
     AutoRoute(page: UserProfileRoute.page, path: '/user', guards: [AuthGuard()]),
+    AutoRoute(page: MessageWriteRoute.page, path: '/news/write', guards: [AuthGuard()]),
     /// Auth
     AutoRoute(page: LoginRoute.page, path: '/login'),
     AutoRoute(page: RegistrationRoute.page, path: '/registration'),

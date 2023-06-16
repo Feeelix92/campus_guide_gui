@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
-import '../widgets/h2.dart';
 
 @RoutePage()
 class NewsScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(),
       drawer: AppDrawer(),
       body: Center(
@@ -20,6 +20,18 @@ class NewsScreen extends StatelessWidget {
             H1(text: 'Nachrichten Page'),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+         Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MessageWriteScreen(),
+            ),
+          );
+        },
+        backgroundColor: Colors.green,
+        child: Icon(Icons.add),
       ),
     );
   }

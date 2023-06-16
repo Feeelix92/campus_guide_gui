@@ -17,6 +17,8 @@ import 'package:campus_guide_gui/screens/news_screen.dart' as _i5;
 import 'package:campus_guide_gui/screens/profile_screen.dart' as _i6;
 import 'package:campus_guide_gui/screens/register_screen.dart' as _i7;
 import 'package:flutter/material.dart' as _i9;
+import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i10;
+
 
 abstract class $AppRouter extends _i8.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -53,6 +55,12 @@ abstract class $AppRouter extends _i8.RootStackRouter {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i5.NewsScreen(),
+      );
+    },
+    MessageWriteRoute.name: (routeData) {
+      return _i8.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i10.MessageWriteScreen(),
       );
     },
     UserProfileRoute.name: (routeData) {
@@ -187,6 +195,20 @@ class RegistrationRoute extends _i8.PageRouteInfo<RegistrationRouteArgs> {
 
   static const _i8.PageInfo<RegistrationRouteArgs> page =
       _i8.PageInfo<RegistrationRouteArgs>(name);
+}
+
+/// generated route for
+/// [_i10.MessageWriteScreen]
+class MessageWriteRoute extends _i8.PageRouteInfo<void> {
+  const MessageWriteRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+    MessageWriteRoute.name,
+    initialChildren: children,
+  );
+
+  static const String name = 'MessageWriteRoute';
+
+  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 class RegistrationRouteArgs {
