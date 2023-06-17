@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'app_router.gr.dart';
-import 'auth_guard.dart';
+import 'route_guard.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends $AppRouter {
