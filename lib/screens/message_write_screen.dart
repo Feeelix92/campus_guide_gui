@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +59,8 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                 const SizedBox(height: 10),
                 TextField(
                   controller: _textController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   decoration: const InputDecoration(
                     labelText: 'Text',
                   ),
@@ -83,7 +86,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const NewsScreen(),
                         ),
                       );
                     } else {

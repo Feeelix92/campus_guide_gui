@@ -5,7 +5,7 @@ class MessageData {
   final String? author;
   final String? created;
   final String? lastChanged;
-  final List<String>? tags;
+  final List<dynamic>? tags;
 
   const MessageData({
     required this.id,
@@ -25,7 +25,7 @@ class MessageData {
       author: json['author'] as String?,
       created: json['created'] as String?,
       lastChanged: json['lastChanged'] as String?,
-      tags: json['tags'] as List<String>?,
+      tags: json['tags'] as List<dynamic>?,
     );
   }
 }

@@ -63,8 +63,10 @@ class Message with ChangeNotifier {
       });
       if (response.statusCode == 200) {
         print('Response from Get: ${response.body}');
-        Iterable l = json.decode(response.body);
-        List<MessageData> messages = List<MessageData>.from(l.map((model)=> MessageData.fromJSON(model)));
+        List<dynamic> l = json.decode(response.body);
+        print('line 67 ${l}');
+        List<MessageData> messages = List<MessageData>.from(l.map((model)=> MessageData.fromJSON(model as Map<String, dynamic>)));
+        print('line 69 ${messages}');
         return messages;
       } else if (response.statusCode == 403) {
         print('403 Error');
