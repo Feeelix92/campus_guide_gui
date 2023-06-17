@@ -35,7 +35,7 @@ abstract class $AppRouter extends _i8.RootStackRouter {
         child: const _i2.HomeScreen(),
       );
     },
-    LocationsRoute.name: (routeData) {
+    LocationRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.LocationScreen(),
@@ -56,9 +56,11 @@ abstract class $AppRouter extends _i8.RootStackRouter {
       );
     },
     UserProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<UserProfileRouteArgs>(
+          orElse: () => const UserProfileRouteArgs());
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child:  _i6.UserProfileScreen(),
+        child: _i6.UserProfileScreen(key: args.key),
       );
     },
     RegistrationRoute.name: (routeData) {
@@ -102,14 +104,14 @@ class HomeRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LocationScreen]
-class LocationsRoute extends _i8.PageRouteInfo<void> {
-  const LocationsRoute({List<_i8.PageRouteInfo>? children})
+class LocationRoute extends _i8.PageRouteInfo<void> {
+  const LocationRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          LocationsRoute.name,
+          LocationRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'LocationsRoute';
+  static const String name = 'LocationRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
@@ -159,16 +161,31 @@ class NewsRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.UserProfileScreen]
-class UserProfileRoute extends _i8.PageRouteInfo<void> {
-  const UserProfileRoute({List<_i8.PageRouteInfo>? children})
-      : super(
+class UserProfileRoute extends _i8.PageRouteInfo<UserProfileRouteArgs> {
+  UserProfileRoute({
+    _i9.Key? key,
+    List<_i8.PageRouteInfo>? children,
+  }) : super(
           UserProfileRoute.name,
+          args: UserProfileRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'UserProfileRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i8.PageInfo<UserProfileRouteArgs> page =
+      _i8.PageInfo<UserProfileRouteArgs>(name);
+}
+
+class UserProfileRouteArgs {
+  const UserProfileRouteArgs({this.key});
+
+  final _i9.Key? key;
+
+  @override
+  String toString() {
+    return 'UserProfileRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
