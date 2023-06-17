@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Locations'),
             onTap: () {
-              AutoRouter.of(context).push(const LocationsRoute());
+              AutoRouter.of(context).push(const LocationRoute());
             },
           ),
           if (authData.isAuth)...[
