@@ -12,7 +12,7 @@ class AuthGuard extends AutoRouteGuard {
     if(prefs.getBool('isAuth') ?? false){
       resolver.next(true);
     } else {
-      router.push(LoginRoute());
+      router.push(LoginScreenRoute());
     }
   }
 }

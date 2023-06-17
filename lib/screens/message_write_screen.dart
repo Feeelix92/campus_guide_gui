@@ -115,6 +115,13 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
             ),
           ),
         ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.green,
+        child: Icon(Icons.arrow_back),
+      ),
       );
   }
 }

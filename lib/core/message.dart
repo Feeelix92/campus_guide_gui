@@ -7,43 +7,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Message with ChangeNotifier {
   String? token;
 
-  Future<void> createMessage(
-      String firstname, String lastname, String email, String phone) async {
+  Future<MessageData?> getMessageData(
+  String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
     var baseURL = 'http://localhost:9006';
-    var url = '$baseURL/api/v1/messages';
+    var url = '$baseURL/api/v1/message/$id}';
     var bearerToken = token!;
-    print(token);
 
     try {
-      var response = await http.post(Uri.parse(url),
-          headers: <String, String>{
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-            'Authorization': 'Bearer $bearerToken'
-          },
-          body: jsonEncode(<String, String>{
-            "id": "1",
-            "image": "string",
-            "firstname": firstname,
-            "lastname": lastname,
-            "email": email,
-            "phone": phone
-          }));
-
+      var response = await http.get(Uri.parse(url), headers: <String, String>{
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $bearerToken'
+      });
       if (response.statusCode == 200) {
-        print('Response from Registration: ${response.body}');
+        print('Response from Get: ${response.body}');
+        return MessageData.fromJSON(jsonDecode(response.body));
       } else if (response.statusCode == 403) {
         print('403 Error');
       } else {
-        print('mies ${response.statusCode}');
+        print('${response.statusCode}');
       }
     } catch (e) {
       throw Exception('ERROR $e');
     }
+    return null;
   }
 
   Future<List<MessageData>?> getMessagesData() async {

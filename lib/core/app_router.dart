@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'app_router.gr.dart';
 import 'auth_guard.dart';
 
@@ -11,14 +10,15 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
     /// routes go here
-    AutoRoute(page: HomeRoute.page, path: '/'),
-    AutoRoute(page: CalendarRoute.page, path: '/calendar', guards: [AuthGuard()]),
-    AutoRoute(page: LocationsRoute.page, path: '/locations', guards: [AuthGuard()]),
-    AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
-    AutoRoute(page: UserProfileRoute.page, path: '/user', guards: [AuthGuard()]),
-    AutoRoute(page: MessageWriteRoute.page, path: '/news/write', guards: [AuthGuard()]),
+    AutoRoute(page: HomeScreenRoute.page, path: '/'),
+    AutoRoute(page: CalendarScreenRoute.page, path: '/calendar', guards: [AuthGuard()]),
+    AutoRoute(page: LocationScreenRoute.page, path: '/locations', guards: [AuthGuard()]),
+    AutoRoute(page: NewsScreenRoute.page, path: '/news', guards: [AuthGuard()]),
+    AutoRoute(page: UserProfileScreenRoute.page, path: '/user', guards: [AuthGuard()]),
+    AutoRoute(page: MessageWriteScreenRoute.page, path: '/news/write', guards: [AuthGuard()]),
+    AutoRoute(path: '/news/:id', page: DetailMessageScreenRoute.page, guards: [AuthGuard()]),
     /// Auth
-    AutoRoute(page: LoginRoute.page, path: '/login'),
-    AutoRoute(page: RegistrationRoute.page, path: '/registration'),
+    AutoRoute(page: LoginScreenRoute.page, path: '/login'),
+    AutoRoute(page: RegistrationScreenRoute.page, path: '/registration'),
   ];
 }

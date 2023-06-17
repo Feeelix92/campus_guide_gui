@@ -8,216 +8,295 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:campus_guide_gui/screens/calendar_screen.dart' as _i1;
-import 'package:campus_guide_gui/screens/home_screen.dart' as _i2;
-import 'package:campus_guide_gui/screens/location_screen.dart' as _i3;
-import 'package:campus_guide_gui/screens/login_screen.dart' as _i4;
-import 'package:campus_guide_gui/screens/news_screen.dart' as _i5;
-import 'package:campus_guide_gui/screens/profile_screen.dart' as _i6;
-import 'package:campus_guide_gui/screens/register_screen.dart' as _i7;
-import 'package:flutter/material.dart' as _i9;
-import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:campus_guide_gui/screens/calendar_screen.dart' as _i5;
+import 'package:campus_guide_gui/screens/detail_message_screen.dart' as _i7;
+import 'package:campus_guide_gui/screens/home_screen.dart' as _i9;
+import 'package:campus_guide_gui/screens/location_screen.dart' as _i8;
+import 'package:campus_guide_gui/screens/login_screen.dart' as _i6;
+import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i1;
+import 'package:campus_guide_gui/screens/news_screen.dart' as _i2;
+import 'package:campus_guide_gui/screens/profile_screen.dart' as _i3;
+import 'package:campus_guide_gui/screens/register_screen.dart' as _i4;
+import 'package:flutter/material.dart' as _i11;
 
-
-abstract class $AppRouter extends _i8.RootStackRouter {
+abstract class $AppRouter extends _i10.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i8.PageFactory> pagesMap = {
-    CalendarRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+  final Map<String, _i10.PageFactory> pagesMap = {
+    MessageWriteScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<MessageWriteScreenRouteArgs>(
+          orElse: () => const MessageWriteScreenRouteArgs());
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.CalendarScreen(),
+        child: _i1.MessageWriteScreen(key: args.key),
       );
     },
-    HomeRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    NewsScreenRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.HomeScreen(),
+        child: const _i2.NewsScreen(),
       );
     },
-    LocationsRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    UserProfileScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<UserProfileScreenRouteArgs>(
+          orElse: () => const UserProfileScreenRouteArgs());
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.LocationScreen(),
+        child: _i3.UserProfileScreen(key: args.key),
       );
     },
-    LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>(
-          orElse: () => const LoginRouteArgs());
-      return _i8.AutoRoutePage<dynamic>(
+    RegistrationScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<RegistrationScreenRouteArgs>(
+          orElse: () => const RegistrationScreenRouteArgs());
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.LoginScreen(key: args.key),
+        child: _i4.RegistrationScreen(key: args.key),
       );
     },
-    NewsRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    CalendarScreenRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.NewsScreen(),
+        child: const _i5.CalendarScreen(),
       );
     },
-    MessageWriteRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    LoginScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginScreenRouteArgs>(
+          orElse: () => const LoginScreenRouteArgs());
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i10.MessageWriteScreen(),
+        child: _i6.LoginScreen(key: args.key),
       );
     },
-    UserProfileRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
+    DetailMessageScreenRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<DetailMessageScreenRouteArgs>(
+          orElse: () => DetailMessageScreenRouteArgs());
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child:  _i6.UserProfileScreen(),
+        child: _i7.DetailMessageScreen(
+          key: args.key,
+          messageID: pathParams.getString('id'),
+        ),
       );
     },
-    RegistrationRoute.name: (routeData) {
-      final args = routeData.argsAs<RegistrationRouteArgs>(
-          orElse: () => const RegistrationRouteArgs());
-      return _i8.AutoRoutePage<dynamic>(
+    LocationScreenRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i7.RegistrationScreen(key: args.key),
+        child: const _i8.LocationScreen(),
+      );
+    },
+    HomeScreenRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.HomeScreen(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.CalendarScreen]
-class CalendarRoute extends _i8.PageRouteInfo<void> {
-  const CalendarRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          CalendarRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CalendarRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i2.HomeScreen]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          HomeRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i3.LocationScreen]
-class LocationsRoute extends _i8.PageRouteInfo<void> {
-  const LocationsRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          LocationsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LocationsRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i4.LoginScreen]
-class LoginRoute extends _i8.PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({
-    _i9.Key? key,
-    List<_i8.PageRouteInfo>? children,
+/// [_i1.MessageWriteScreen]
+class MessageWriteScreenRoute
+    extends _i10.PageRouteInfo<MessageWriteScreenRouteArgs> {
+  MessageWriteScreenRoute({
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
-          LoginRoute.name,
-          args: LoginRouteArgs(key: key),
+          MessageWriteScreenRoute.name,
+          args: MessageWriteScreenRouteArgs(key: key),
           initialChildren: children,
         );
 
-  static const String name = 'LoginRoute';
+  static const String name = 'MessageWriteScreenRoute';
 
-  static const _i8.PageInfo<LoginRouteArgs> page =
-      _i8.PageInfo<LoginRouteArgs>(name);
+  static const _i10.PageInfo<MessageWriteScreenRouteArgs> page =
+      _i10.PageInfo<MessageWriteScreenRouteArgs>(name);
 }
 
-class LoginRouteArgs {
-  const LoginRouteArgs({this.key});
+class MessageWriteScreenRouteArgs {
+  const MessageWriteScreenRouteArgs({this.key});
 
-  final _i9.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
-    return 'LoginRouteArgs{key: $key}';
+    return 'MessageWriteScreenRouteArgs{key: $key}';
   }
 }
 
 /// generated route for
-/// [_i5.NewsScreen]
-class NewsRoute extends _i8.PageRouteInfo<void> {
-  const NewsRoute({List<_i8.PageRouteInfo>? children})
+/// [_i2.NewsScreen]
+class NewsScreenRoute extends _i10.PageRouteInfo<void> {
+  const NewsScreenRoute({List<_i10.PageRouteInfo>? children})
       : super(
-          NewsRoute.name,
+          NewsScreenRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'NewsRoute';
+  static const String name = 'NewsScreenRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i6.UserProfileScreen]
-class UserProfileRoute extends _i8.PageRouteInfo<void> {
-  const UserProfileRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          UserProfileRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'UserProfileRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i7.RegistrationScreen]
-class RegistrationRoute extends _i8.PageRouteInfo<RegistrationRouteArgs> {
-  RegistrationRoute({
-    _i9.Key? key,
-    List<_i8.PageRouteInfo>? children,
+/// [_i3.UserProfileScreen]
+class UserProfileScreenRoute
+    extends _i10.PageRouteInfo<UserProfileScreenRouteArgs> {
+  UserProfileScreenRoute({
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
-          RegistrationRoute.name,
-          args: RegistrationRouteArgs(key: key),
+          UserProfileScreenRoute.name,
+          args: UserProfileScreenRouteArgs(key: key),
           initialChildren: children,
         );
 
-  static const String name = 'RegistrationRoute';
+  static const String name = 'UserProfileScreenRoute';
 
-  static const _i8.PageInfo<RegistrationRouteArgs> page =
-      _i8.PageInfo<RegistrationRouteArgs>(name);
+  static const _i10.PageInfo<UserProfileScreenRouteArgs> page =
+      _i10.PageInfo<UserProfileScreenRouteArgs>(name);
 }
 
-/// generated route for
-/// [_i10.MessageWriteScreen]
-class MessageWriteRoute extends _i8.PageRouteInfo<void> {
-  const MessageWriteRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-    MessageWriteRoute.name,
-    initialChildren: children,
-  );
+class UserProfileScreenRouteArgs {
+  const UserProfileScreenRouteArgs({this.key});
 
-  static const String name = 'MessageWriteRoute';
-
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
-}
-
-class RegistrationRouteArgs {
-  const RegistrationRouteArgs({this.key});
-
-  final _i9.Key? key;
+  final _i11.Key? key;
 
   @override
   String toString() {
-    return 'RegistrationRouteArgs{key: $key}';
+    return 'UserProfileScreenRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [_i4.RegistrationScreen]
+class RegistrationScreenRoute
+    extends _i10.PageRouteInfo<RegistrationScreenRouteArgs> {
+  RegistrationScreenRoute({
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
+          RegistrationScreenRoute.name,
+          args: RegistrationScreenRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'RegistrationScreenRoute';
+
+  static const _i10.PageInfo<RegistrationScreenRouteArgs> page =
+      _i10.PageInfo<RegistrationScreenRouteArgs>(name);
+}
+
+class RegistrationScreenRouteArgs {
+  const RegistrationScreenRouteArgs({this.key});
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'RegistrationScreenRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i5.CalendarScreen]
+class CalendarScreenRoute extends _i10.PageRouteInfo<void> {
+  const CalendarScreenRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          CalendarScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CalendarScreenRoute';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i6.LoginScreen]
+class LoginScreenRoute extends _i10.PageRouteInfo<LoginScreenRouteArgs> {
+  LoginScreenRoute({
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
+          LoginScreenRoute.name,
+          args: LoginScreenRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginScreenRoute';
+
+  static const _i10.PageInfo<LoginScreenRouteArgs> page =
+      _i10.PageInfo<LoginScreenRouteArgs>(name);
+}
+
+class LoginScreenRouteArgs {
+  const LoginScreenRouteArgs({this.key});
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'LoginScreenRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i7.DetailMessageScreen]
+class DetailMessageScreenRoute
+    extends _i10.PageRouteInfo<DetailMessageScreenRouteArgs> {
+  DetailMessageScreenRoute({
+    _i11.Key? key,
+    List<_i10.PageRouteInfo>? children, required String id,
+  }) : super(
+          DetailMessageScreenRoute.name,
+          args: DetailMessageScreenRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'DetailMessageScreenRoute';
+
+  static const _i10.PageInfo<DetailMessageScreenRouteArgs> page =
+      _i10.PageInfo<DetailMessageScreenRouteArgs>(name);
+}
+
+class DetailMessageScreenRouteArgs {
+  const DetailMessageScreenRouteArgs({this.key});
+
+  final _i11.Key? key;
+
+  @override
+  String toString() {
+    return 'DetailMessageScreenRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i8.LocationScreen]
+class LocationScreenRoute extends _i10.PageRouteInfo<void> {
+  const LocationScreenRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          LocationScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LocationScreenRoute';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i9.HomeScreen]
+class HomeScreenRoute extends _i10.PageRouteInfo<void> {
+  const HomeScreenRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          HomeScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeScreenRoute';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/message.dart';
@@ -6,6 +7,7 @@ import '../model/message_data.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
+import 'detail_message_screen.dart';
 
 @RoutePage()
 class NewsScreen extends StatefulWidget {
@@ -26,7 +28,7 @@ class _NewsScreenState extends State<NewsScreen> {
     getNews();
   }
 
-  getNews(){
+  getNews() {
     final profile = Message();
     messageDataFuture = profile.getMessagesData();
     print(messageDataFuture);
@@ -45,30 +47,36 @@ class _NewsScreenState extends State<NewsScreen> {
           children: [
             H1(text: 'Nachrichten Page'),
             if (finish) ...[
-            FutureBuilder<List<MessageData>?>(
-                future: messageDataFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              title: Text(snapshot.data![index].title!),
-                              subtitle: Text(snapshot.data![index].text!),
-                              trailing: Text(snapshot.data![index].author!),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return const CircularProgressIndicator();
-                },
-              ),
+              FutureBuilder<List<MessageData>?>(
+                  future: messageDataFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                  title: Text(snapshot.data![index].title!),
+                                  subtitle: Text(
+                                    snapshot.data![index].text!,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                  ),
+                                  trailing: Text(
+                                      snapshot.data![index].author ?? 'Anonym'),
+                                  onTap: () {
+                                    AutoRouter.of(context).push( DetailMessageScreenRoute(id: snapshot.data![index].id!));
+                                  }),
+                            );
+                          },
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return const CircularProgressIndicator();
+                  }),
             ] else ...[
               CircularProgressIndicator()
             ],
@@ -77,12 +85,7 @@ class _NewsScreenState extends State<NewsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MessageWriteScreen(),
-            ),
-          );
+          AutoRouter.of(context).push( MessageWriteScreenRoute());
         },
         backgroundColor: Colors.green,
         child: Icon(Icons.add),
@@ -90,3 +93,5 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 }
+
+
