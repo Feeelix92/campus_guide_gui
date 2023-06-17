@@ -11,11 +11,12 @@ class Message with ChangeNotifier {
   String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    print(id);
 
     var baseURL = 'http://localhost:9006';
-    var url = '$baseURL/api/v1/message/$id}';
+    var url = '$baseURL/api/v1/messages/$id';
     var bearerToken = token!;
-
+    print(url);
     try {
       var response = await http.get(Uri.parse(url), headers: <String, String>{
         'Access-Control-Allow-Origin': '*',
