@@ -64,7 +64,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                   trailing: Text(
                                       snapshot.data![index].author ?? 'Anonym'),
                                   onTap: () {
-                                    context.pushRoute(DetailMessageScreenRoute(id: snapshot.data![index].id!));
+                                    context.pushRoute(DetailMessageRoute(id: snapshot.data![index].id!));
                                   }),
                             );
                           },
@@ -83,7 +83,7 @@ class _NewsScreenState extends State<NewsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          AutoRouter.of(context).push( const MessageWriteScreenRoute());
+          AutoRouter.of(context).push( const MessageWriteRoute());
         },
         backgroundColor: Colors.green,
         child: const Icon(Icons.add),
