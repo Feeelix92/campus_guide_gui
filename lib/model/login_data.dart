@@ -1,4 +1,3 @@
-
 class LoginData {
   String? token;
 
