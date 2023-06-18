@@ -21,7 +21,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Home'),
             onTap: () {
-              AutoRouter.of(context).push(const HomeScreenRoute());
+              AutoRouter.of(context).push(const HomeRoute());
             },
           ),
           ListTile(
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Kalender'),
             onTap: () {
-              AutoRouter.of(context).push(const CalendarScreenRoute());
+              AutoRouter.of(context).push(const CalendarRoute());
             },
           ),
           ListTile(
@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Nachrichten'),
             onTap: () {
-              AutoRouter.of(context).push(const NewsScreenRoute());
+              AutoRouter.of(context).push(const NewsRoute());
             },
           ),
           ListTile(
@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Locations'),
             onTap: () {
-              AutoRouter.of(context).push(const LocationScreenRoute());
+              AutoRouter.of(context).push(const LocationRoute());
             },
           ),
           if (authData.isAuth)...[
@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
               title: const Text('Abmelden'),
               onTap: () {
                 authData.logout();
-                AutoRouter.of(context).push(const HomeScreenRoute());
+                AutoRouter.of(context).push(const HomeRoute());
               },
             ),
           ]
@@ -70,7 +70,7 @@ class AppDrawer extends StatelessWidget {
               ),
               title: const Text('Anmelden'),
               onTap: () {
-                AutoRouter.of(context).push(LoginScreenRoute());
+                AutoRouter.of(context).push(LoginRoute());
               },
             ),
           ]

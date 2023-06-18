@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
                 onPressed: () => {
-                AutoRouter.of(context).push(UserProfileScreenRoute())},
+                AutoRouter.of(context).push(UserProfileRoute())},
                 icon: const Icon(Icons.person)
             )
         )

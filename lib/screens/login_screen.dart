@@ -17,6 +17,21 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
       return Scaffold(
+        // authData.isAuth == true ?
+        //   const H2(text: 'Du bist bereits angemeldet.'),
+        //   const SizedBox(height: 10),
+        //   ElevatedButton(
+        //     onPressed: () {
+        //       authData.logout();
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => LoginScreen(),
+        //         ),
+        //       );
+        //     },
+        //     child: const Text('Abmelden'),
+        //   ),
         appBar: AppBar(
           title: const Text(Constants.appName),
         ),
