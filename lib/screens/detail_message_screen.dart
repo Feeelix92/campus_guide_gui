@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/message.dart';
 import '../model/message_data.dart';
@@ -9,11 +8,8 @@ import '../widgets/h1.dart';
 
 @RoutePage()
 class DetailMessageScreen extends StatefulWidget {
-
-  final String messageID;
-
-  const DetailMessageScreen({Key? key,@PathParam.inherit('id') required this.messageID})
-      : super(key: key);
+  const DetailMessageScreen({super.key, @PathParam('id') required this.id});
+  final String id;
 
 
   @override
@@ -21,8 +17,6 @@ class DetailMessageScreen extends StatefulWidget {
 }
 
 class _DetailMessageScreenState extends State<DetailMessageScreen> {
-  @override
-
   late Future<MessageData?> messageData;
   bool finish = false;
 
@@ -35,20 +29,21 @@ class _DetailMessageScreenState extends State<DetailMessageScreen> {
 
   getNews() {
     final profile = Message();
-    messageData = profile.getMessageData(widget.messageID);
+    messageData = profile.getMessageData(widget.id);
     setState(() {
       finish = true;
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
-      drawer: AppDrawer(),
+      appBar: const CustomAppBar(),
+      drawer: const AppDrawer(),
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Detail Page'),
+            const H1(text: 'Detail Page'),
             FutureBuilder(future: messageData, builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Column(
@@ -59,7 +54,7 @@ class _DetailMessageScreenState extends State<DetailMessageScreen> {
                   ],
                 );
               } else {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
             }),
           ],
@@ -70,7 +65,7 @@ class _DetailMessageScreenState extends State<DetailMessageScreen> {
           Navigator.pop(context);
         },
         backgroundColor: Colors.green,
-        child: Icon(Icons.arrow_back),
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }

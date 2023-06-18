@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/core/app_router.gr.dart';
-import 'package:campus_guide_gui/screens/message_write_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/message.dart';
 import '../model/message_data.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
-import 'detail_message_screen.dart';
 
 @RoutePage()
 class NewsScreen extends StatefulWidget {
@@ -40,12 +38,12 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
-      drawer: AppDrawer(),
+      appBar: const CustomAppBar(),
+      drawer: const AppDrawer(),
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Nachrichten Page'),
+            const H1(text: 'Nachrichten Page'),
             if (finish) ...[
               FutureBuilder<List<MessageData>?>(
                   future: messageDataFuture,
@@ -66,7 +64,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                   trailing: Text(
                                       snapshot.data![index].author ?? 'Anonym'),
                                   onTap: () {
-                                    AutoRouter.of(context).push( DetailMessageScreenRoute(id: snapshot.data![index].id!));
+                                    context.pushRoute(DetailMessageScreenRoute(id: snapshot.data![index].id!));
                                   }),
                             );
                           },
@@ -78,17 +76,17 @@ class _NewsScreenState extends State<NewsScreen> {
                     return const CircularProgressIndicator();
                   }),
             ] else ...[
-              CircularProgressIndicator()
+              const CircularProgressIndicator()
             ],
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          AutoRouter.of(context).push( MessageWriteScreenRoute());
+          AutoRouter.of(context).push( const MessageWriteScreenRoute());
         },
         backgroundColor: Colors.green,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

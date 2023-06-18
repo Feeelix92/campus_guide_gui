@@ -13,10 +13,10 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: HomeScreenRoute.page, path: '/'),
     AutoRoute(page: CalendarScreenRoute.page, path: '/calendar', guards: [AuthGuard()]),
     AutoRoute(page: LocationScreenRoute.page, path: '/locations', guards: [AuthGuard()]),
-    AutoRoute(page: NewsScreenRoute.page, path: '/news', guards: [AuthGuard()]),
     AutoRoute(page: UserProfileScreenRoute.page, path: '/user', guards: [AuthGuard()]),
+    AutoRoute(page: NewsScreenRoute.page, path: '/news', guards: [AuthGuard()]),
     AutoRoute(page: MessageWriteScreenRoute.page, path: '/news/write', guards: [AuthGuard()]),
-    AutoRoute(path: '/news/:id', page: DetailMessageScreenRoute.page, guards: [AuthGuard()]),
+    AutoRoute(page: DetailMessageScreenRoute.page, path: '/news/:id', guards: [AuthGuard()]),
     /// Auth
     AutoRoute(page: LoginScreenRoute.page, path: '/login'),
     AutoRoute(page: RegistrationScreenRoute.page, path: '/registration'),

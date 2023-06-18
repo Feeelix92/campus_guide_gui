@@ -1,20 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/news_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../core/message.dart';
-import '../data/constants.dart';
 import '../widgets/h1.dart';
-import 'home_screen.dart';
-
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 
 @RoutePage()
 class MessageWriteScreen extends StatefulWidget {
 
-  MessageWriteScreen({super.key});
+  const MessageWriteScreen({super.key});
 
   @override
   State<MessageWriteScreen> createState() => _MessageWriteScreenState();
