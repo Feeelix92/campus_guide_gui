@@ -115,10 +115,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         OutlinedButton(
                             onPressed: () {
                               profile.deleteProfile();
-                              authData.logout();
-                              AutoRouter.of(context).push(const HomeRoute());
+                              _getUpdatedProfileDataHandler();
                             },
-                            child: const Text('Löschen')
+                            child: const Text('Profil löschen')
                         )
                       ],
                     );
@@ -126,6 +125,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     return Column(
                       children: [
                         const Text('Es scheint kein Profil von dir zu existieren. Bitte lege ein neues an.'),
+                        const SizedBox(height: 16),
                         ElevatedButton(
                             onPressed: () {
                               AutoRouter.of(context).push(RecreateProfileRoute());
