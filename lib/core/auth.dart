@@ -71,7 +71,7 @@ class Auth with ChangeNotifier {
             "email": email,
             "password": password,
             "roles": [
-              "STUDENT"
+              "USER"
             ]
           }));
       if (response.statusCode == 403) {
