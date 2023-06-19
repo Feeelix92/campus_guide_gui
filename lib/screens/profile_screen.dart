@@ -123,7 +123,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ],
                     );
                   } else {
-                    return const Text('Ein Fehler ist aufgetreten');
+                    return Column(
+                      children: [
+                        const Text('Es scheint kein Profil von dir zu existieren. Bitte lege ein neues an.'),
+                        ElevatedButton(
+                            onPressed: () {
+                              AutoRouter.of(context).push(RecreateProfileRoute());
+                              },
+                            child: const Text('Neues Profil')
+                        )
+                      ],
+                    );
                   }
                 },
               )),

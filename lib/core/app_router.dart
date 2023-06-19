@@ -17,6 +17,7 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
     AutoRoute(page: MessageWriteRoute.page, path: '/news/write', guards: [AuthGuard()]),
     AutoRoute(page: DetailMessageRoute.page, path: '/news/:id', guards: [AuthGuard()]),
+    AutoRoute(page: RecreateProfileRoute.page, path: '/user/create', guards: [AuthGuard()]),
     /// Auth
     AutoRoute(page: LoginRoute.page, path: '/login', guards: [LoginGuard()]),
     AutoRoute(page: RegistrationRoute.page, path: '/registration', guards: [LoginGuard()]),
