@@ -1,8 +1,15 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../core/app_router.gr.dart';
+import '../core/auth.dart';
+import '../core/profile.dart';
+import '../model/profile_data.dart';
 import '../widgets/studentId.dart';
 import '../widgets/h2.dart';
 
@@ -10,8 +17,22 @@ import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
 
 @RoutePage()
-class UserProfileScreen extends StatelessWidget {
-   UserProfileScreen({Key? key}) : super(key: key);
+class UserProfileScreen extends StatefulWidget {
+  const UserProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  late Future<ProfileData?> profileDataFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    final profile = Profile();
+    profileDataFuture = profile.getProfileData();
+  }
 
   final String firstName = "Pascal";
   final String lastName = "Block";
@@ -22,40 +43,93 @@ class UserProfileScreen extends StatelessWidget {
   final int matriculationNumber = 123456;
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
+  final profile = Profile();
+  /*
+  Future<void> createProfileHandler() async {
+    final profile = Profile();
+    //await profile.createProfile(firstName);
+    //await profile.getProfileData();
+  }
+   */
+
+  void _getUpdatedProfileDataHandler() {
+
+    Timer(const Duration(milliseconds: 200), () {
+      setState(() {
+        profileDataFuture = profile.getProfileData();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
-      drawer: const AppDrawer(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              _TopPortion(
-                userName: userName,
-                password: password,
-              ),
-              H1(text: '$firstName $lastName'),
-              H3(text: '@$userName'),
-              const SizedBox(height: 16),
-              _ProfileInfoRow(
-                matriculationNumber: matriculationNumber,
-                degree: degree,
-                currentSemester: currentSemester,
-              ),
-              const SizedBox(height: 16),
-              StudentID(
-                  firstName: firstName,
-                  lastName: lastName,
-                  matriculationNumber: matriculationNumber,
-                  startSemesterTicket: startSemesterTicket,
-                  endSemesterTicket: endSemesterTicket)
-            ],
-          ),
+    return Consumer<Auth>(builder: (context, authData, child) {
+      return Scaffold(
+        appBar: const CustomAppBar(),
+        drawer: const AppDrawer(),
+        body: SingleChildScrollView(
+          child: Center(
+              child: FutureBuilder<ProfileData?>(
+                future: profileDataFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    var profileData = snapshot.data!;
+                    return Column(
+                      children: [
+                        _TopPortion(
+                            firstname: profileData.firstname!,
+                            lastname: profileData.lastname!,
+                            phone: profileData.phone!,
+                            email: profileData.email!,
+                            loadNewData: _getUpdatedProfileDataHandler
+                        ),
+                        H1(text: '${profileData.firstname} ${profileData
+                            .lastname}'),
+                        H3(text: '@${profileData.email}'),
+                        const SizedBox(height: 16),
+                        _ProfileInfoRow(
+                          matriculationNumber: matriculationNumber,
+                          degree: degree,
+                          currentSemester: currentSemester,
+                        ),
+                        const SizedBox(height: 16),
+                        StudentID(
+                            firstName: profileData.firstname!,
+                            lastName: profileData.lastname!,
+                            matriculationNumber: matriculationNumber,
+                            startSemesterTicket: startSemesterTicket,
+                            endSemesterTicket: endSemesterTicket
+                        ),
+                        OutlinedButton(
+                            onPressed: () {
+                              profile.deleteProfile();
+                              authData.logout();
+                              AutoRouter.of(context).push(const HomeRoute());
+                            },
+                            child: const Text('Löschen')
+                        )
+                      ],
+                    );
+                  } else {
+                    return const Text('Ein Fehler ist aufgetreten');
+                  }
+                },
+              )),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -129,14 +203,32 @@ class _ProfileInfoRow extends StatelessWidget {
 }
 
 class _TopPortion extends StatelessWidget {
-  _TopPortion({Key? key, required this.userName, required this.password})
+  _TopPortion(
+      {Key? key,
+      required this.firstname,
+      required this.lastname,
+      required this.email,
+      required this.phone,
+      required this.loadNewData})
       : super(key: key);
 
   String userImage = "";
-  final String userName;
-  final String password;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  String firstname;
+  String lastname;
+  String email;
+  String phone;
+
+  final VoidCallback loadNewData;
+
+  final TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  Future<void> editProfileHandler(firstname, lastname, email, phone) async {
+    final profile = Profile();
+    await profile.editProfileData(firstname, lastname, email, phone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +281,10 @@ class _TopPortion extends StatelessWidget {
   }
 
   Future<void> _dialogBuilder(BuildContext context) async {
-    _usernameController.text = userName;
-    _passwordController.text = password;
+    _firstnameController.text = firstname;
+    _lastnameController.text = lastname;
+    _emailController.text = email;
+    _phoneController.text = phone;
 
     showModalBottomSheet<void>(
       context: context,
@@ -208,18 +302,31 @@ class _TopPortion extends StatelessWidget {
                   const H2(text: 'Profil bearbeiten'),
                   const ImageUpload(),
                   TextField(
-                    controller: _usernameController,
+                    controller: _firstnameController,
                     decoration: const InputDecoration(
-                      labelText: 'Benutzername',
+                      labelText: 'Vorname',
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextField(
-                    controller: _passwordController,
+                    controller: _lastnameController,
                     decoration: const InputDecoration(
-                      labelText: 'Passwort',
+                      labelText: 'Nachname',
                     ),
-                    obscureText: true,
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'E-Mail',
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nachname',
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -232,7 +339,17 @@ class _TopPortion extends StatelessWidget {
                       FilledButton(
                         child: const Text('Speichern'),
                         onPressed: () => {
+                          firstname = _firstnameController.text,
+                          lastname = _lastnameController.text,
+                          email = _emailController.text,
+                          phone = _phoneController.text,
                           ImageUpload.triggerFunction(),
+                          firstname,
+                          lastname,
+                          email,
+                          phone,
+                          editProfileHandler(firstname, lastname, email, phone),
+                          loadNewData(),
                           Navigator.pop(context)
                         },
                       ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:campus_guide_gui/core/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,8 @@ class Auth with ChangeNotifier {
     authToken;
     return token != null;
   }
+
+  var profile = Profile();
 
   get authToken async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -56,20 +59,20 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> register(String username, String password, String email) async {
+  Future<void> register(String username,String firstname, String lastname, String password, String phone, String email) async {
     var baseURL = 'http://localhost:8080';
     var url = '$baseURL/api/v1/auth/register';
     print(url);
     try {
       var response = await http.post(Uri.parse(url),
           headers: <String, String>{"Content-Type": "application/json"},
-          body: jsonEncode(<String, String>{
+          body: jsonEncode(<String, dynamic>{
             "username": username,
             "email": email,
             "password": password,
-            "roles": (
-              "string"
-            )
+            "roles": [
+              "STUDENT"
+            ]
           }));
       if (response.statusCode == 403) {
         print('403 Error');
@@ -82,6 +85,7 @@ class Auth with ChangeNotifier {
         if (isAuth) {
           prefs.setString('token', token!);
           prefs.setBool('isAuth', isAuth);
+          profile.createProfile(firstname, lastname, email, phone);
         }
       }
     } catch (e) {
