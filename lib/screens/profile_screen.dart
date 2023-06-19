@@ -98,12 +98,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         H1(text: '${profileData.firstname} ${profileData
                             .lastname}'),
                         H3(text: '@${profileData.email}'),
+                        /*
                         const SizedBox(height: 16),
                         _ProfileInfoRow(
                           matriculationNumber: matriculationNumber,
                           degree: degree,
                           currentSemester: currentSemester,
                         ),
+                         */
                         const SizedBox(height: 16),
                         StudentID(
                             firstName: profileData.firstname!,
@@ -143,7 +145,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 }
 
-class ProfileInfoItem {
+
+/*class ProfileInfoItem {
   final String title;
   late String value;
 
@@ -211,6 +214,8 @@ class _ProfileInfoRow extends StatelessWidget {
         ],
       );
 }
+ */
+
 
 class _TopPortion extends StatelessWidget {
   _TopPortion(
@@ -310,7 +315,9 @@ class _TopPortion extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const H2(text: 'Profil bearbeiten'),
+                  /*
                   const ImageUpload(),
+                   */
                   TextField(
                     controller: _firstnameController,
                     decoration: const InputDecoration(
