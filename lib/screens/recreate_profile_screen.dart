@@ -75,6 +75,24 @@ class RecreateProfileScreen extends StatelessWidget {
                       ) {
                         profile.createProfile(firstname, lastname, email, phone);
                         AutoRouter.of(context).push( const UserProfileRoute());
+                      } else{
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AlertDialog(
+                                title: const Text('Fehler'),
+                                content: const Text(
+                                    'Bitte füllen Sie alle Felder aus.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              ),
+                        );
                       }
                     },
                     child: const Text('Anlegen')

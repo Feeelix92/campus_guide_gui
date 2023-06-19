@@ -118,8 +118,31 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         endSemesterTicket: endSemesterTicket),
                     OutlinedButton(
                         onPressed: () {
-                          profile.deleteProfile();
-                          _getUpdatedProfileDataHandler();
+                          showDialog(
+                            context: context,
+                            builder: (context) =>
+                                AlertDialog(
+                                  title: const Text('Profil löschen'),
+                                  content: const Text(
+                                      'Wollen Sie das Profil wirklich löschen.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Abbruch'),
+                                    ),
+                                    FilledButton(
+                                        onPressed: (){
+                                          profile.deleteProfile();
+                                          _getUpdatedProfileDataHandler();
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Icon(Icons.delete)
+                                    )
+                                  ],
+                                ),
+                          );
                         },
                         child: const Text('Profil löschen'))
                   ],
@@ -128,7 +151,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 return Column(
                   children: [
                     const Text(
-                        'Es scheint kein Profil von dir zu existieren. Bitte lege ein neues an.'),
+                        'Es scheint kein Profil von Ihnen zu existieren. Bitte legen Sie ein Neues an.'),
                     const SizedBox(height: 16),
                     ElevatedButton(
                         onPressed: () {
