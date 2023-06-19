@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'app_router.gr.dart';
-import 'auth_guard.dart';
+import 'route_guard.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'Route')
+@AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends $AppRouter {
   @override
   RouteType get defaultRouteType => const RouteType.material();
@@ -12,11 +12,13 @@ class AppRouter extends $AppRouter {
     /// routes go here
     AutoRoute(page: HomeRoute.page, path: '/'),
     AutoRoute(page: CalendarRoute.page, path: '/calendar', guards: [AuthGuard()]),
-    AutoRoute(page: LocationsRoute.page, path: '/locations', guards: [AuthGuard()]),
-    AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
+    AutoRoute(page: LocationRoute.page, path: '/locations', guards: [AuthGuard()]),
     AutoRoute(page: UserProfileRoute.page, path: '/user', guards: [AuthGuard()]),
+    AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
+    AutoRoute(page: MessageWriteRoute.page, path: '/news/write', guards: [AuthGuard()]),
+    AutoRoute(page: DetailMessageRoute.page, path: '/news/:id', guards: [AuthGuard()]),
     /// Auth
-    AutoRoute(page: LoginRoute.page, path: '/login'),
-    AutoRoute(page: RegistrationRoute.page, path: '/registration'),
+    AutoRoute(page: LoginRoute.page, path: '/login', guards: [LoginGuard()]),
+    AutoRoute(page: RegistrationRoute.page, path: '/registration', guards: [LoginGuard()]),
   ];
 }

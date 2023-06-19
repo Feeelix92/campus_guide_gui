@@ -2,12 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/h1.dart';
-import '../widgets/h2.dart';
 import 'home_screen.dart';
 
 @RoutePage()
@@ -20,6 +17,21 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
       return Scaffold(
+        // authData.isAuth == true ?
+        //   const H2(text: 'Du bist bereits angemeldet.'),
+        //   const SizedBox(height: 10),
+        //   ElevatedButton(
+        //     onPressed: () {
+        //       authData.logout();
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => LoginScreen(),
+        //         ),
+        //       );
+        //     },
+        //     child: const Text('Abmelden'),
+        //   ),
         appBar: AppBar(
           title: const Text(Constants.appName),
         ),
