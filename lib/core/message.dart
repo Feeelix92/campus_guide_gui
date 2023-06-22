@@ -114,4 +114,47 @@ class Message with ChangeNotifier {
       throw Exception('ERROR $e');
     }
   }
+  Future<void> putMessageData(
+      String id, String title, String text, String author, String created, String lastChanged, List<String> tags) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9006';
+    var url = '$baseURL/api/v1/message/$id';
+    var bearerToken = token!;
+    created = DateTime.now().toString();
+    print(created) ;
+
+    print(token);
+    try {
+      var headers = <String, String>{
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $bearerToken',
+      };
+
+      var response = await http.put(Uri.parse(url),
+          headers: headers,
+          body: jsonEncode(<String, dynamic>{
+            "title": title,
+            "text": text,
+            "author": author,
+            "created": created,
+            "lastChanged": lastChanged,
+            "tags": ["cool"]
+          }));
+      print(response);
+
+      if (response.statusCode == 200) {
+        print('Response from Update: ${response.body}');
+      } else if (response.statusCode == 403) {
+        print('403 Error');
+      } else {
+        print('mies ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('ERROR $e');
+    }
+  }
 }
