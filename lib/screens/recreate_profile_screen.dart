@@ -102,6 +102,13 @@ class RecreateProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          AutoRouter.of(context).push(const UserProfileRoute());
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.arrow_back),
+      ),
     );
   }
 }
