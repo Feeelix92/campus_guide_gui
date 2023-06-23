@@ -14,9 +14,10 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: CalendarRoute.page, path: '/calendar', guards: [AuthGuard()]),
     AutoRoute(page: LocationRoute.page, path: '/locations', guards: [AuthGuard()]),
     AutoRoute(page: UserProfileRoute.page, path: '/user', guards: [AuthGuard()]),
-    AutoRoute(page: NewsRoute.page, path: '/news', guards: [AuthGuard()]),
+    AutoRoute(page: MessageRoute.page, path: '/news', guards: [AuthGuard()]),
     AutoRoute(page: MessageWriteRoute.page, path: '/news/write', guards: [AuthGuard()]),
-    AutoRoute(page: DetailMessageRoute.page, path: '/news/:id', guards: [AuthGuard()]),
+    AutoRoute(page: MessageEditRoute.page, path: '/news/edit/:id', guards: [AuthGuard()]),
+    AutoRoute(page: MessageDetailRoute.page, path: '/news/:id', guards: [AuthGuard()]),
     AutoRoute(page: RecreateProfileRoute.page, path: '/user/create', guards: [AuthGuard()]),
     /// Auth
     AutoRoute(page: LoginRoute.page, path: '/login', guards: [LoginGuard()]),

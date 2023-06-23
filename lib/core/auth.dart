@@ -24,6 +24,7 @@ class Auth with ChangeNotifier {
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
+    prefs.remove('username');
     prefs.setBool('isAuth', false);
     token = null;
     notifyListeners();
@@ -51,6 +52,7 @@ class Auth with ChangeNotifier {
         if (isAuth) {
           prefs.setString('token', token!);
           prefs.setBool('isAuth', isAuth);
+          prefs.setString('username', username);
         }
       }
     } catch (e) {
@@ -71,7 +73,7 @@ class Auth with ChangeNotifier {
             "email": email,
             "password": password,
             "roles": [
-              "STUDENT"
+              "USER"
             ]
           }));
       if (response.statusCode == 403) {
@@ -85,6 +87,7 @@ class Auth with ChangeNotifier {
         if (isAuth) {
           prefs.setString('token', token!);
           prefs.setBool('isAuth', isAuth);
+          prefs.setString('username', username);
           profile.createProfile(firstname, lastname, email, phone);
         }
       }

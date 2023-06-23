@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: const Text('Nachrichten'),
             onTap: () {
-              AutoRouter.of(context).push(const NewsRoute());
+              AutoRouter.of(context).push(const MessageRoute());
             },
           ),
           ListTile(

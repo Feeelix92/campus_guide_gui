@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Message with ChangeNotifier {
   String? token;
+  String? username;
 
   Future<MessageData?> getMessageData(
   String id) async {
@@ -71,16 +72,15 @@ class Message with ChangeNotifier {
     return null;
   }
 
-  Future<void> postMessageData(
-      String title, String text, String author, String created, String lastChanged, List<String> tags) async {
+  Future<void> postMessageData(String title, String text, String teaser, String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    username = prefs.getString('username');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
-    created = DateTime.now().toString();
-    print(created) ;
+    var messageOwner = username!;
 
     print(token);
     try {
@@ -96,10 +96,50 @@ class Message with ChangeNotifier {
           body: jsonEncode(<String, dynamic>{
             "title": title,
             "text": text,
+            "teaser": teaser,
             "author": author,
-            "created": created,
-            "lastChanged": lastChanged,
-            "tags": ["cool"]
+            "owner": messageOwner,
+            "tags": tags
+          }));
+      print(response);
+
+      if (response.statusCode == 200) {
+        print('Response from Update: ${response.body}');
+      } else if (response.statusCode == 403) {
+        print('403 Error');
+      } else {
+        print('mies ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('ERROR $e');
+    }
+  }
+  Future<void> putMessageData(
+      String id, String title, String text, String teaser,  String author, List<String> tags) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9006';
+    var url = '$baseURL/api/v1/messages/$id';
+    var bearerToken = token!;
+
+    print(token);
+    try {
+      var headers = <String, String>{
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $bearerToken',
+      };
+
+      var response = await http.put(Uri.parse(url),
+          headers: headers,
+          body: jsonEncode(<String, dynamic>{
+            "title": title,
+            "text": text,
+            "teaser": teaser,
+            "author": author,
+            "tags": tags
           }));
       print(response);
 

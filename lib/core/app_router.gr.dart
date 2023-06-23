@@ -10,15 +10,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
 import 'package:campus_guide_gui/screens/calendar_screen.dart' as _i1;
-import 'package:campus_guide_gui/screens/detail_message_screen.dart' as _i2;
-import 'package:campus_guide_gui/screens/home_screen.dart' as _i3;
-import 'package:campus_guide_gui/screens/location_screen.dart' as _i4;
-import 'package:campus_guide_gui/screens/login_screen.dart' as _i5;
-import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i6;
-import 'package:campus_guide_gui/screens/news_screen.dart' as _i7;
-import 'package:campus_guide_gui/screens/profile_screen.dart' as _i8;
-import 'package:campus_guide_gui/screens/recreate_profile_screen.dart' as _i9;
-import 'package:campus_guide_gui/screens/register_screen.dart' as _i10;
+import 'package:campus_guide_gui/screens/home_screen.dart' as _i2;
+import 'package:campus_guide_gui/screens/location_screen.dart' as _i3;
+import 'package:campus_guide_gui/screens/login_screen.dart' as _i4;
+import 'package:campus_guide_gui/screens/message_detail_screen.dart' as _i10;
+import 'package:campus_guide_gui/screens/message_edit_screen.dart' as _i8;
+import 'package:campus_guide_gui/screens/message_screen.dart' as _i9;
+import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i5;
+import 'package:campus_guide_gui/screens/profile_screen.dart' as _i6;
+import 'package:campus_guide_gui/screens/register_screen.dart' as _i7;
 import 'package:flutter/material.dart' as _i12;
 
 abstract class $AppRouter extends _i11.RootStackRouter {
@@ -32,28 +32,16 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         child: const _i1.CalendarScreen(),
       );
     },
-    DetailMessageRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<DetailMessageRouteArgs>(
-          orElse: () => DetailMessageRouteArgs(id: pathParams.getString('id')));
-      return _i11.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i2.DetailMessageScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
     HomeRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.HomeScreen(),
+        child: const _i2.HomeScreen(),
       );
     },
     LocationRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.LocationScreen(),
+        child: const _i3.LocationScreen(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -61,33 +49,19 @@ abstract class $AppRouter extends _i11.RootStackRouter {
           orElse: () => const LoginRouteArgs());
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.LoginScreen(key: args.key),
+        child: _i4.LoginScreen(key: args.key),
       );
     },
     MessageWriteRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.MessageWriteScreen(),
-      );
-    },
-    NewsRoute.name: (routeData) {
-      return _i11.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i7.NewsScreen(),
+        child: const _i5.MessageWriteScreen(),
       );
     },
     UserProfileRoute.name: (routeData) {
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.UserProfileScreen(),
-      );
-    },
-    RecreateProfileRoute.name: (routeData) {
-      final args = routeData.argsAs<RecreateProfileRouteArgs>(
-          orElse: () => const RecreateProfileRouteArgs());
-      return _i11.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i9.RecreateProfileScreen(key: args.key),
+        child: const _i6.UserProfileScreen(),
       );
     },
     RegistrationRoute.name: (routeData) {
@@ -95,7 +69,37 @@ abstract class $AppRouter extends _i11.RootStackRouter {
           orElse: () => const RegistrationRouteArgs());
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i10.RegistrationScreen(key: args.key),
+        child: _i7.RegistrationScreen(key: args.key),
+      );
+    },
+    MessageEditRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<MessageEditRouteArgs>(
+          orElse: () => MessageEditRouteArgs(id: pathParams.getString('id')));
+      return _i11.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i8.MessageEditScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
+    MessageRoute.name: (routeData) {
+      return _i11.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.MessageScreen(),
+      );
+    },
+    MessageDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<MessageDetailRouteArgs>(
+          orElse: () => MessageDetailRouteArgs(id: pathParams.getString('id')));
+      return _i11.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i10.MessageDetailScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
   };
@@ -116,46 +120,7 @@ class CalendarRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.DetailMessageScreen]
-class DetailMessageRoute extends _i11.PageRouteInfo<DetailMessageRouteArgs> {
-  DetailMessageRoute({
-    _i12.Key? key,
-    required String id,
-    List<_i11.PageRouteInfo>? children,
-  }) : super(
-          DetailMessageRoute.name,
-          args: DetailMessageRouteArgs(
-            key: key,
-            id: id,
-          ),
-          rawPathParams: {'id': id},
-          initialChildren: children,
-        );
-
-  static const String name = 'DetailMessageRoute';
-
-  static const _i11.PageInfo<DetailMessageRouteArgs> page =
-      _i11.PageInfo<DetailMessageRouteArgs>(name);
-}
-
-class DetailMessageRouteArgs {
-  const DetailMessageRouteArgs({
-    this.key,
-    required this.id,
-  });
-
-  final _i12.Key? key;
-
-  final String id;
-
-  @override
-  String toString() {
-    return 'DetailMessageRouteArgs{key: $key, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i3.HomeScreen]
+/// [_i2.HomeScreen]
 class HomeRoute extends _i11.PageRouteInfo<void> {
   const HomeRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -169,7 +134,7 @@ class HomeRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.LocationScreen]
+/// [_i3.LocationScreen]
 class LocationRoute extends _i11.PageRouteInfo<void> {
   const LocationRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -183,7 +148,7 @@ class LocationRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.LoginScreen]
+/// [_i4.LoginScreen]
 class LoginRoute extends _i11.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     _i12.Key? key,
@@ -212,7 +177,7 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i6.MessageWriteScreen]
+/// [_i5.MessageWriteScreen]
 class MessageWriteRoute extends _i11.PageRouteInfo<void> {
   const MessageWriteRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -226,21 +191,7 @@ class MessageWriteRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.NewsScreen]
-class NewsRoute extends _i11.PageRouteInfo<void> {
-  const NewsRoute({List<_i11.PageRouteInfo>? children})
-      : super(
-          NewsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NewsRoute';
-
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i8.UserProfileScreen]
+/// [_i6.UserProfileScreen]
 class UserProfileRoute extends _i11.PageRouteInfo<void> {
   const UserProfileRoute({List<_i11.PageRouteInfo>? children})
       : super(
@@ -254,37 +205,7 @@ class UserProfileRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.RecreateProfileScreen]
-class RecreateProfileRoute
-    extends _i11.PageRouteInfo<RecreateProfileRouteArgs> {
-  RecreateProfileRoute({
-    _i12.Key? key,
-    List<_i11.PageRouteInfo>? children,
-  }) : super(
-          RecreateProfileRoute.name,
-          args: RecreateProfileRouteArgs(key: key),
-          initialChildren: children,
-        );
-
-  static const String name = 'RecreateProfileRoute';
-
-  static const _i11.PageInfo<RecreateProfileRouteArgs> page =
-      _i11.PageInfo<RecreateProfileRouteArgs>(name);
-}
-
-class RecreateProfileRouteArgs {
-  const RecreateProfileRouteArgs({this.key});
-
-  final _i12.Key? key;
-
-  @override
-  String toString() {
-    return 'RecreateProfileRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [_i10.RegistrationScreen]
+/// [_i7.RegistrationScreen]
 class RegistrationRoute extends _i11.PageRouteInfo<RegistrationRouteArgs> {
   RegistrationRoute({
     _i12.Key? key,
@@ -309,5 +230,97 @@ class RegistrationRouteArgs {
   @override
   String toString() {
     return 'RegistrationRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i8.MessageEditScreen]
+class MessageEditRoute extends _i11.PageRouteInfo<MessageEditRouteArgs> {
+  MessageEditRoute({
+    _i12.Key? key,
+    required String id,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+          MessageEditRoute.name,
+          args: MessageEditRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'MessageEditRoute';
+
+  static const _i11.PageInfo<MessageEditRouteArgs> page =
+      _i11.PageInfo<MessageEditRouteArgs>(name);
+}
+
+class MessageEditRouteArgs {
+  const MessageEditRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final _i12.Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'MessageEditRouteArgs{key: $key, id: $id}';
+  }
+}
+
+/// generated route for
+/// [_i9.MessageScreen]
+class MessageRoute extends _i11.PageRouteInfo<void> {
+  const MessageRoute({List<_i11.PageRouteInfo>? children})
+      : super(
+          MessageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MessageRoute';
+
+  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i10.MessageDetailScreen]
+class MessageDetailRoute extends _i11.PageRouteInfo<MessageDetailRouteArgs> {
+  MessageDetailRoute({
+    _i12.Key? key,
+    required String id,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+          MessageDetailRoute.name,
+          args: MessageDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'MessageDetailRoute';
+
+  static const _i11.PageInfo<MessageDetailRouteArgs> page =
+      _i11.PageInfo<MessageDetailRouteArgs>(name);
+}
+
+class MessageDetailRouteArgs {
+  const MessageDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final _i12.Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'MessageDetailRouteArgs{key: $key, id: $id}';
   }
 }

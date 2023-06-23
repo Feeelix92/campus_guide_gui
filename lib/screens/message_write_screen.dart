@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/news_screen.dart';
+import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
+import '../core/app_router.gr.dart';
 import '../core/message.dart';
 import '../widgets/h1.dart';
 import '../widgets/appDrawer.dart';
@@ -17,9 +18,8 @@ class MessageWriteScreen extends StatefulWidget {
 
 class _MessageWriteScreenState extends State<MessageWriteScreen> {
   final TextEditingController _titleController = TextEditingController();
-
   final TextEditingController _textController = TextEditingController();
-
+  final TextEditingController _teaserController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
 
   @override
@@ -41,7 +41,6 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                 .size
                 .width / 3,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const H1(text: 'Schreiben Sie einen Beitrag'),
                 const SizedBox(height: 20),
@@ -52,6 +51,14 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
+                TextField(
+                  controller: _teaserController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    labelText: 'Teaser',
+                  ),
+                ),
                 TextField(
                   controller: _textController,
                   keyboardType: TextInputType.multiline,
@@ -72,18 +79,14 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                   onPressed: () {
                     String titel = _titleController.text;
                     String text = _textController.text;
+                    String teaser = _teaserController.text;
                     String author = _authorController.text;
 
                     // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
                     if (titel.isNotEmpty && text.isNotEmpty &&
                         author.isNotEmpty) {
-                      message.postMessageData(titel, text, author, "", "", [""]);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NewsScreen(),
-                        ),
-                      );
+                      message.postMessageData(titel, text, author, teaser, [""]);
+                      AutoRouter.of(context).push(const MessageRoute());
                     } else {
                       showDialog(
                         context: context,
@@ -112,10 +115,9 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          AutoRouter.of(context).push(const MessageRoute());
         },
-        backgroundColor: Colors.green,
-        child: Icon(Icons.arrow_back),
+        child: const Icon(Icons.arrow_back),
       ),
       );
   }
