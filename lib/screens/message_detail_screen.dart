@@ -84,7 +84,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          AutoRouter.of(context).push(const MessageRoute());
         },
         child: const Icon(Icons.arrow_back),
       ),
