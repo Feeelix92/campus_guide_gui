@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:campus_guide_gui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,21 +18,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
       return Scaffold(
-        // authData.isAuth == true ?
-        //   const H2(text: 'Du bist bereits angemeldet.'),
-        //   const SizedBox(height: 10),
-        //   ElevatedButton(
-        //     onPressed: () {
-        //       authData.logout();
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => LoginScreen(),
-        //         ),
-        //       );
-        //     },
-        //     child: const Text('Abmelden'),
-        //   ),
         appBar: AppBar(
           title: const Text(Constants.appName),
         ),
@@ -66,12 +52,7 @@ class LoginScreen extends StatelessWidget {
                     // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
                     if (username.isNotEmpty && password.isNotEmpty) {
                       authData.login(username, password);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      );
+                      AutoRouter.of(context).push(const HomeRoute());
                     } else {
                       showDialog(
                         context: context,
@@ -95,12 +76,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
-                      ),
-                    );
+                    AutoRouter.of(context).push(RegistrationRoute());
                   },
                   child: const Text('Registrieren'),
                 ),

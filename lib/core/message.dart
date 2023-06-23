@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Message with ChangeNotifier {
   String? token;
-  String? owner;
+  String? username;
 
   Future<MessageData?> getMessageData(
   String id) async {
@@ -75,12 +75,12 @@ class Message with ChangeNotifier {
   Future<void> postMessageData(String title, String text, String teaser, String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
-    owner = prefs.getString('owner');
+    username = prefs.getString('username');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
-    var messageOwner = owner!;
+    var messageOwner = username!;
 
     print(token);
     try {

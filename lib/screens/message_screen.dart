@@ -58,7 +58,7 @@ class _MessageScreenState extends State<MessageScreen> {
                               child: ListTile(
                                   title: Text(snapshot.data![index].title!),
                                   subtitle: Text(
-                                    snapshot.data![index].text!,
+                                    snapshot.data![index].teaser!,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
                                   ),

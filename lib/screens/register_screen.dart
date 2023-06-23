@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/h1.dart';
@@ -95,12 +96,7 @@ class RegistrationScreen extends StatelessWidget {
                           password.isNotEmpty) {
                         authData.register(username, firstname, lastname, email,
                             phone, password);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
+                        AutoRouter.of(context).push(const HomeRoute());
                       } else {
                         showDialog(
                           context: context,
