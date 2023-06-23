@@ -103,7 +103,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                       text.isNotEmpty &&
                                       author.isNotEmpty) {
                                     message.putMessageData(
-                                        snapshot.data!.id! ,titel, text, author, "", "", [""]);
+                                        snapshot.data!.id! ,titel, text, author, ["cool", "nice"]);
                                   } else {
                                     showDialog(
                                       context: context,

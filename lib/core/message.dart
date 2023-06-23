@@ -99,7 +99,7 @@ class Message with ChangeNotifier {
             "author": author,
             "created": created,
             "lastChanged": lastChanged,
-            "tags": ["cool"]
+            "tags": tags
           }));
       print(response);
 
@@ -115,15 +115,13 @@ class Message with ChangeNotifier {
     }
   }
   Future<void> putMessageData(
-      String id, String title, String text, String author, String created, String lastChanged, List<String> tags) async {
+      String id, String title, String text, String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
     var baseURL = 'http://localhost:9006';
-    var url = '$baseURL/api/v1/message/$id';
+    var url = '$baseURL/api/v1/messages/$id';
     var bearerToken = token!;
-    created = DateTime.now().toString();
-    print(created) ;
 
     print(token);
     try {
@@ -140,9 +138,7 @@ class Message with ChangeNotifier {
             "title": title,
             "text": text,
             "author": author,
-            "created": created,
-            "lastChanged": lastChanged,
-            "tags": ["cool"]
+            "tags": tags
           }));
       print(response);
 
