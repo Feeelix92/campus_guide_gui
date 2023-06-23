@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
+import '../core/app_router.gr.dart';
 import '../core/message.dart';
 import '../widgets/h1.dart';
 import '../widgets/appDrawer.dart';
@@ -17,9 +18,8 @@ class MessageWriteScreen extends StatefulWidget {
 
 class _MessageWriteScreenState extends State<MessageWriteScreen> {
   final TextEditingController _titleController = TextEditingController();
-
   final TextEditingController _textController = TextEditingController();
-
+  final TextEditingController _teaserController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
 
   @override
@@ -59,6 +59,14 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                     labelText: 'Text',
                   ),
                 ),
+                TextField(
+                  controller: _teaserController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    labelText: 'Teaser',
+                  ),
+                ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: _authorController,
@@ -71,18 +79,14 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                   onPressed: () {
                     String titel = _titleController.text;
                     String text = _textController.text;
+                    String teaser = _teaserController.text;
                     String author = _authorController.text;
 
                     // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
                     if (titel.isNotEmpty && text.isNotEmpty &&
                         author.isNotEmpty) {
-                      message.postMessageData(titel, text, author, [""]);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MessageScreen(),
-                        ),
-                      );
+                      message.postMessageData(titel, text, author, teaser, [""]);
+                      AutoRouter.of(context).push(const MessageRoute());
                     } else {
                       showDialog(
                         context: context,

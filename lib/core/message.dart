@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Message with ChangeNotifier {
   String? token;
+  String? owner;
 
   Future<MessageData?> getMessageData(
   String id) async {
@@ -71,14 +72,15 @@ class Message with ChangeNotifier {
     return null;
   }
 
-  Future<void> postMessageData(
-      String title, String text, String author, List<String> tags) async {
+  Future<void> postMessageData(String title, String text, String teaser, String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    owner = prefs.getString('owner');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
+    var messageOwner = owner!;
 
     print(token);
     try {
@@ -94,7 +96,9 @@ class Message with ChangeNotifier {
           body: jsonEncode(<String, dynamic>{
             "title": title,
             "text": text,
+            "teaser": teaser,
             "author": author,
+            "owner": messageOwner,
             "tags": tags
           }));
       print(response);
@@ -111,7 +115,7 @@ class Message with ChangeNotifier {
     }
   }
   Future<void> putMessageData(
-      String id, String title, String text, String author, List<String> tags) async {
+      String id, String title, String text, String teaser,  String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -133,6 +137,7 @@ class Message with ChangeNotifier {
           body: jsonEncode(<String, dynamic>{
             "title": title,
             "text": text,
+            "teaser": teaser,
             "author": author,
             "tags": tags
           }));

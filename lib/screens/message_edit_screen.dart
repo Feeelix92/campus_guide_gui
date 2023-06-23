@@ -20,11 +20,9 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
   bool finish = false;
 
   final TextEditingController _titleController = TextEditingController();
-
   final TextEditingController _textController = TextEditingController();
-
+  final TextEditingController _teaserController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
-
   late Future<MessageData?> messageData;
 
   @override
@@ -60,6 +58,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                     if (snapshot.hasData) {
                       _titleController.text = snapshot.data!.title!;
                       _textController.text = snapshot.data!.text!;
+                      _teaserController.text = snapshot.data!.teaser!;
                       _authorController.text = snapshot.data!.author!;
                       return Center(
                         child: SizedBox(
@@ -84,6 +83,14 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                   labelText: 'Text',
                                 ),
                               ),
+                              TextField(
+                                controller: _teaserController,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                decoration: const InputDecoration(
+                                  labelText: 'Teaser',
+                                ),
+                              ),
                               const SizedBox(height: 10),
                               TextField(
                                 controller: _authorController,
@@ -96,6 +103,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                 onPressed: () {
                                   String titel = _titleController.text;
                                   String text = _textController.text;
+                                  String teaser = _teaserController.text;
                                   String author = _authorController.text;
 
                                   // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
@@ -103,7 +111,8 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                       text.isNotEmpty &&
                                       author.isNotEmpty) {
                                     message.putMessageData(
-                                        snapshot.data!.id! ,titel, text, author, ["cool", "nice"]);
+                                        snapshot.data!.id! ,titel, text, author, teaser, [""]);
+                                    AutoRouter.of(context).push(const MessageRoute());
                                   } else {
                                     showDialog(
                                       context: context,
