@@ -72,15 +72,13 @@ class Message with ChangeNotifier {
   }
 
   Future<void> postMessageData(
-      String title, String text, String author, String created, String lastChanged, List<String> tags) async {
+      String title, String text, String author, List<String> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
-    created = DateTime.now().toString();
-    print(created) ;
 
     print(token);
     try {
@@ -97,8 +95,6 @@ class Message with ChangeNotifier {
             "title": title,
             "text": text,
             "author": author,
-            "created": created,
-            "lastChanged": lastChanged,
             "tags": tags
           }));
       print(response);

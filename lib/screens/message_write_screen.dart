@@ -76,7 +76,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                     // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
                     if (titel.isNotEmpty && text.isNotEmpty &&
                         author.isNotEmpty) {
-                      message.postMessageData(titel, text, author, "", "", [""]);
+                      message.postMessageData(titel, text, author, [""]);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
