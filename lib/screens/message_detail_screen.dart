@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import '../core/message.dart';
 import '../model/message_data.dart';
@@ -7,16 +8,16 @@ import '../widgets/customAppBar.dart';
 import '../widgets/h1.dart';
 
 @RoutePage()
-class DetailMessageScreen extends StatefulWidget {
-  const DetailMessageScreen({super.key, @PathParam('id') required this.id});
+class MessageDetailScreen extends StatefulWidget {
+  const MessageDetailScreen({super.key, @PathParam('id') required this.id});
   final String id;
 
 
   @override
-  State<DetailMessageScreen> createState() => _DetailMessageScreenState();
+  State<MessageDetailScreen> createState() => _MessageDetailScreenState();
 }
 
-class _DetailMessageScreenState extends State<DetailMessageScreen> {
+class _MessageDetailScreenState extends State<MessageDetailScreen> {
   late Future<MessageData?> messageData;
   bool finish = false;
 
@@ -64,8 +65,9 @@ class _DetailMessageScreenState extends State<DetailMessageScreen> {
                   thickness: 10,
                 ),
                 ElevatedButton(onPressed: () {
-                  Navigator.pop(context);
-                }, child: Text('Zurück')),
+                  // AutoRouter.of(context).push( MessageEditRoute(id: snapshot.data!.id!));
+                  context.pushRoute(MessageEditRoute(id: snapshot.data!.id!));
+                }, child: const Text('Bearbeiten')),
 
               ],
             ),

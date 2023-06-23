@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/news_screen.dart';
+import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/message.dart';
 import '../widgets/h1.dart';
@@ -81,7 +81,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NewsScreen(),
+                          builder: (context) => const MessageScreen(),
                         ),
                       );
                     } else {
@@ -115,7 +115,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
           Navigator.pop(context);
         },
         backgroundColor: Colors.green,
-        child: Icon(Icons.arrow_back),
+        child: const Icon(Icons.arrow_back),
       ),
       );
   }

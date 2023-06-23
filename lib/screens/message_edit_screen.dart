@@ -71,7 +71,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                               const SizedBox(height: 20),
                               TextField(
                                 controller: _titleController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: 'Titel',
                                 ),
                               ),
@@ -80,14 +80,14 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                 controller: _textController,
                                 keyboardType: TextInputType.multiline,
                                 maxLines: null,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: 'Text',
                                 ),
                               ),
                               const SizedBox(height: 10),
                               TextField(
                                 controller: _authorController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: 'author',
                                 ),
                               ),
@@ -142,7 +142,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          AutoRouter.of(context).push(const MessageWriteRoute());
+          Navigator.pop(context);
         },
         backgroundColor: Colors.green,
         child: const Icon(Icons.add),
