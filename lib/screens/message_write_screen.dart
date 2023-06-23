@@ -52,110 +52,113 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
     return Scaffold(
       appBar: const CustomAppBar(),
       drawer: const AppDrawer(),
-        body: Center(
-          child: SizedBox(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width / 3,
-            child: Column(
-              children: [
-                const H1(text: 'Schreiben Sie einen Beitrag'),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(
-                    labelText: 'Titel',
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _teaserController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    labelText: 'Teaser',
-                  ),
-                ),
-                TextField(
-                  controller: _textController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    labelText: 'Text',
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _authorController,
-                  decoration: const InputDecoration(
-                    labelText: 'Autor',
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: _tagController,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
-                  ], // Only
-                  decoration: InputDecoration(
-                    labelText: 'Tag hinzufügen',
-                    hintText: '...',
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () {
-                        _addTag(_tagController.text);
-                        _tagController.clear();
-                      },
+        body: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width / 3,
+              child: Column(
+                children: [
+                  const H1(text: 'Schreiben Sie einen Beitrag'),
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: _titleController,
+                    decoration: const InputDecoration(
+                      labelText: 'Titel',
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Wrap(
-                  spacing: 8,
-                  children: _tags.map((tag) {
-                    return Chip(
-                      label: Text(tag),
-                      onDeleted: () => _removeTag(tag),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    String titel = _titleController.text;
-                    String text = _textController.text;
-                    String teaser = _teaserController.text;
-                    String author = _authorController.text;
-
-                    // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
-                    if (titel.isNotEmpty && text.isNotEmpty &&
-                        author.isNotEmpty) {
-                      message.postMessageData(titel, text, teaser, author, _tags);
-                      AutoRouter.of(context).push(const MessageRoute());
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) =>
-                            AlertDialog(
-                              title: const Text('Fehler'),
-                              content: const Text(
-                                  'Bitte füllen Sie alle Felder aus.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _teaserController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                      labelText: 'Teaser',
+                    ),
+                  ),
+                  TextField(
+                    controller: _textController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                      labelText: 'Text',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _authorController,
+                    decoration: const InputDecoration(
+                      labelText: 'Autor',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextField(
+                    controller: _tagController,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                    ], // Only
+                    decoration: InputDecoration(
+                      labelText: 'Tag hinzufügen',
+                      hintText: '...',
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () {
+                          _addTag(_tagController.text);
+                          _tagController.clear();
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    children: _tags.map((tag) {
+                      return Chip(
+                        label: Text(tag),
+                        onDeleted: () => _removeTag(tag),
                       );
-                    }
-                  },
-                  child: const Text('Nachricht posten'),
-                ),
-              ],
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      String titel = _titleController.text;
+                      String text = _textController.text;
+                      String teaser = _teaserController.text;
+                      String author = _authorController.text;
+
+                      // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
+                      if (titel.isNotEmpty && text.isNotEmpty &&
+                          author.isNotEmpty) {
+                        message.postMessageData(titel, text, teaser, author, _tags);
+                        AutoRouter.of(context).push(const MessageRoute());
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AlertDialog(
+                                title: const Text('Fehler'),
+                                content: const Text(
+                                    'Bitte füllen Sie alle Felder aus.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              ),
+                        );
+                      }
+                    },
+                    child: const Text('Nachricht posten'),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
             ),
           ),
         ),
