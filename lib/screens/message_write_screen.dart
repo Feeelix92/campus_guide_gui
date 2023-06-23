@@ -114,7 +114,6 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
         onPressed: () {
           Navigator.pop(context);
         },
-        backgroundColor: Colors.green,
         child: const Icon(Icons.arrow_back),
       ),
       );

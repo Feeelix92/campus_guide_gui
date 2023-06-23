@@ -85,7 +85,6 @@ class _MessageScreenState extends State<MessageScreen> {
         onPressed: () {
           AutoRouter.of(context).push( const MessageWriteRoute());
         },
-        backgroundColor: Colors.green,
         child: const Icon(Icons.add),
       ),
     );

@@ -144,8 +144,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
         onPressed: () {
           Navigator.pop(context);
         },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }

@@ -80,8 +80,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
         onPressed: () {
           Navigator.pop(context);
         },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.edit),
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }
