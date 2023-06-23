@@ -6,6 +6,9 @@ import 'package:campus_guide_gui/widgets/h3.dart';
 import 'package:campus_guide_gui/widgets/image_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:random_avatar/random_avatar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 import '../core/profile.dart';
@@ -44,6 +47,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   final DateTime startSemesterTicket = DateTime(2023, 09, 30);
   final DateTime endSemesterTicket = DateTime(2022, 10, 01);
   final profile = Profile();
+
   /*
   Future<void> createProfileHandler() async {
     final profile = Profile();
@@ -53,7 +57,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
    */
 
   void _getUpdatedProfileDataHandler() {
-
     Timer(const Duration(milliseconds: 200), () {
       setState(() {
         profileDataFuture = profile.getProfileData();
@@ -70,70 +73,103 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         body: SingleChildScrollView(
           child: Center(
               child: FutureBuilder<ProfileData?>(
-                future: profileDataFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    var profileData = snapshot.data!;
-                    return Column(
-                      children: [
-                        _TopPortion(
-                            firstname: profileData.firstname!,
-                            lastname: profileData.lastname!,
-                            phone: profileData.phone!,
-                            email: profileData.email!,
-                            loadNewData: _getUpdatedProfileDataHandler
-                        ),
-                        H1(text: '${profileData.firstname} ${profileData
-                            .lastname}'),
-                        H3(text: '@${profileData.email}'),
+            future: profileDataFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                var profileData = snapshot.data!;
+                return Column(
+                  children: [
+                    _TopPortion(
+                        firstname: profileData.firstname!,
+                        lastname: profileData.lastname!,
+                        phone: profileData.phone!,
+                        email: profileData.email!,
+                        loadNewData: _getUpdatedProfileDataHandler),
+                    H1(
+                        text:
+                            '${profileData.firstname} ${profileData.lastname}'),
+                    H3(text: '@${profileData.email}'),
+                    /*
                         const SizedBox(height: 16),
                         _ProfileInfoRow(
                           matriculationNumber: matriculationNumber,
                           degree: degree,
                           currentSemester: currentSemester,
                         ),
-                        const SizedBox(height: 16),
-                        StudentID(
-                            firstName: profileData.firstname!,
-                            lastName: profileData.lastname!,
-                            matriculationNumber: matriculationNumber,
-                            startSemesterTicket: startSemesterTicket,
-                            endSemesterTicket: endSemesterTicket
-                        ),
-                        OutlinedButton(
-                            onPressed: () {
-                              profile.deleteProfile();
-                              authData.logout();
-                              AutoRouter.of(context).push(const HomeRoute());
-                            },
-                            child: const Text('Löschen')
-                        )
-                      ],
-                    );
-                  } else {
-                    return const Text('Ein Fehler ist aufgetreten');
-                  }
-                },
-              )),
+                         */
+                    const SizedBox(height: 16),
+                    StudentID(
+                        firstName: profileData.firstname!,
+                        lastName: profileData.lastname!,
+                        matriculationNumber: matriculationNumber,
+                        startSemesterTicket: startSemesterTicket,
+                        endSemesterTicket: endSemesterTicket),
+                    OutlinedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) =>
+                                AlertDialog(
+                                  title: const Text('Profil löschen'),
+                                  content: const Text(
+                                      'Wollen Sie das Profil wirklich löschen.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Abbruch'),
+                                    ),
+                                    FilledButton(
+                                        onPressed: (){
+                                          profile.deleteProfile();
+                                          _getUpdatedProfileDataHandler();
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Icon(Icons.delete)
+                                    )
+                                  ],
+                                ),
+                          );
+                        },
+                        child: const Text('Profil löschen'))
+                  ],
+                );
+              } else {
+                return Column(
+                  children: [
+                    const Text(
+                        'Es scheint kein Profil von Ihnen zu existieren. Bitte legen Sie ein Neues an.'),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                        onPressed: () {
+                          AutoRouter.of(context).push(RecreateProfileRoute());
+                        },
+                        child: const Text('Neues Profil'))
+                  ],
+                );
+              }
+            },
+          )),
         ),
       );
     });
   }
 }
 
-class ProfileInfoItem {
+/*class ProfileInfoItem {
   final String title;
   late String value;
 
@@ -201,6 +237,7 @@ class _ProfileInfoRow extends StatelessWidget {
         ],
       );
 }
+ */
 
 class _TopPortion extends StatelessWidget {
   _TopPortion(
@@ -212,11 +249,12 @@ class _TopPortion extends StatelessWidget {
       required this.loadNewData})
       : super(key: key);
 
-  String userImage = "";
   String firstname;
   String lastname;
   String email;
   String phone;
+  late String userImage =
+      RandomAvatarString('$firstname $lastname', trBackground: true);
 
   final VoidCallback loadNewData;
 
@@ -260,6 +298,16 @@ class _TopPortion extends StatelessWidget {
                         )
                       : Container(
                           decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border:
+                                  Border.all(color: Colors.green, width: 3)),
+                          child: SvgPicture.string(userImage,
+                              width: 50, height: 50),
+                        ),
+
+                  /*    :
+                  Container(
+                          decoration: BoxDecoration(
                             color: Colors.black,
                             shape: BoxShape.circle,
                             image: DecorationImage(
@@ -267,6 +315,8 @@ class _TopPortion extends StatelessWidget {
                                 image: NetworkImage(userImage)),
                           ),
                         ),
+
+                   */
                   Positioned(
                       bottom: 0,
                       right: 0,
@@ -300,7 +350,9 @@ class _TopPortion extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const H2(text: 'Profil bearbeiten'),
+                  /*
                   const ImageUpload(),
+                   */
                   TextField(
                     controller: _firstnameController,
                     decoration: const InputDecoration(
