@@ -52,19 +52,19 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                 ),
                 const SizedBox(height: 10),
                 TextField(
-                  controller: _textController,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: const InputDecoration(
-                    labelText: 'Text',
-                  ),
-                ),
-                TextField(
                   controller: _teaserController,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   decoration: const InputDecoration(
                     labelText: 'Teaser',
+                  ),
+                ),
+                TextField(
+                  controller: _textController,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    labelText: 'Text',
                   ),
                 ),
                 const SizedBox(height: 10),
