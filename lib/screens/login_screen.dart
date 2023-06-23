@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:campus_guide_gui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../core/auth.dart';
 import '../data/constants.dart';
@@ -31,6 +32,9 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextField(
                   controller: _usernameController,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                  ], // Only
                   decoration: const InputDecoration(
                     labelText: 'Benutzername',
                   ),

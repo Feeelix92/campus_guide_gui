@@ -21,7 +21,6 @@ class _CustomTextState extends State<CustomText> {
         widget._text,
         style: const TextStyle(
           fontSize: 16,
-          fontWeight: FontWeight.bold,
         ),
       ),
     );

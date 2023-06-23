@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../core/app_router.gr.dart';
@@ -37,6 +38,9 @@ class RegistrationScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   TextField(
                     controller: _usernameController,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                    ], // Only
                     decoration: const InputDecoration(
                       labelText: 'Benutzername',
                     ),
@@ -44,6 +48,9 @@ class RegistrationScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: _firstnameController,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                    ], // Only
                     decoration: const InputDecoration(
                       labelText: 'Vorname',
                     ),
@@ -51,6 +58,9 @@ class RegistrationScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: _lastnameController,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                    ], // Only
                     decoration: const InputDecoration(
                       labelText: 'Nachname',
                     ),
