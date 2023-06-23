@@ -41,7 +41,6 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                 .size
                 .width / 3,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const H1(text: 'Schreiben Sie einen Beitrag'),
                 const SizedBox(height: 20),
