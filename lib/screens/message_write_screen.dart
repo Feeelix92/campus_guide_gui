@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../core/app_router.gr.dart';
 import '../core/message.dart';
 import '../widgets/h1.dart';
@@ -21,13 +22,30 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _teaserController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
+  final TextEditingController _tagController = TextEditingController();
+  List<String> _tags = [];
+  final message = Message();
 
   @override
   void initState() {
     super.initState();
   }
 
-  final message = Message();
+  void _addTag(String tag) {
+    // Nur nicht-leere Tags hinzufügen
+    if (tag.isNotEmpty) {
+      tag = tag.toLowerCase();
+      setState(() {
+        _tags.add(tag);
+      });
+    }
+  }
+
+  void _removeTag(String tag) {
+    setState(() {
+      _tags.remove(tag);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +93,34 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
+                TextField(
+                  controller: _tagController,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z]")),
+                  ], // Only
+                  decoration: InputDecoration(
+                    labelText: 'Tag hinzufügen',
+                    hintText: '...',
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        _addTag(_tagController.text);
+                        _tagController.clear();
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 8,
+                  children: _tags.map((tag) {
+                    return Chip(
+                      label: Text(tag),
+                      onDeleted: () => _removeTag(tag),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     String titel = _titleController.text;
@@ -85,7 +131,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                     // Beispiel-Validierung: Überprüfen, ob alle Felder nicht leer sind
                     if (titel.isNotEmpty && text.isNotEmpty &&
                         author.isNotEmpty) {
-                      message.postMessageData(titel, text, author, teaser, [""]);
+                      message.postMessageData(titel, text, teaser, author, _tags);
                       AutoRouter.of(context).push(const MessageRoute());
                     } else {
                       showDialog(

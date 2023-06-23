@@ -67,6 +67,20 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                 thickness: 10,
               ),
               CustomText(text: snapshot.data!.text!),
+              const SizedBox(height: 10),
+              Text(
+                'Tags:',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 8,
+                children: snapshot.data!.tags!.map((tag) {
+                  return Chip(
+                    label: Text(tag),
+                  );
+                }).toList(),
+              ),
               const Divider(
                 color: Colors.transparent,
                 thickness: 10,

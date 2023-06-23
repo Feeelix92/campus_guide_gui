@@ -72,7 +72,7 @@ class Message with ChangeNotifier {
     return null;
   }
 
-  Future<void> postMessageData(String title, String text, String teaser, String author, List<String> tags) async {
+  Future<void> postMessageData(String title, String text, String teaser, String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
     username = prefs.getString('username');
@@ -115,7 +115,7 @@ class Message with ChangeNotifier {
     }
   }
   Future<void> putMessageData(
-      String id, String title, String text, String teaser,  String author, List<String> tags) async {
+      String id, String title, String text, String teaser,  String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
