@@ -21,6 +21,11 @@ class Auth with ChangeNotifier {
     token = prefs.getString('token');
   }
 
+  void delayFunction() async {
+    await Future.delayed(const Duration(seconds: 2));
+    print('Verzögerung abgeschlossen');
+  }
+
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
@@ -30,7 +35,7 @@ class Auth with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> login(String username, String password) async {
+  Future<bool> login(String username, String password) async {
     var baseURL = 'http://localhost:8080';
     var url = '$baseURL/api/v1/auth/authenticate';
     print(url);
@@ -43,6 +48,7 @@ class Auth with ChangeNotifier {
           }));
       if (response.statusCode == 403) {
         print('403 Error');
+        return false;
       } else if (response.statusCode == 200) {
         print('Response from Login: ${response.body}');
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -54,11 +60,13 @@ class Auth with ChangeNotifier {
           prefs.setBool('isAuth', isAuth);
           prefs.setString('username', username);
         }
+        return true;
       }
     } catch (e) {
       throw Exception('ERROR $e');
     }
     notifyListeners();
+    return false;
   }
 
   Future<void> register(String username,String firstname, String lastname, String password, String phone, String email) async {

@@ -11,10 +11,11 @@ import 'home_screen.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  LoginScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
@@ -49,30 +50,21 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    final autoRouter = AutoRouter.of(context);
+                    final showDialog = buildShowDialog(context);
                     String username = _usernameController.text;
                     String password = _passwordController.text;
-
                     // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
                     if (username.isNotEmpty && password.isNotEmpty) {
-                      authData.login(username, password);
-                      AutoRouter.of(context).push(const HomeRoute());
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Fehler'),
-                          content: const Text('Ungültiger Benutzername oder Passwort.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
+                      if (await authData.login(username, password)) {
+                        print('LoginScreen: Authentifizierung erfolgreich');
+                        autoRouter.push(const HomeRoute());
+                      } else {
+                        print(
+                            'LoginScreen: Authentifizierung nicht erfolgreich');
+                        showDialog;
+                      }
                     }
                   },
                   child: const Text('Anmelden'),
@@ -90,5 +82,23 @@ class LoginScreen extends StatelessWidget {
         ),
       );
     });
+  }
+
+  Future<dynamic> buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Fehler'),
+        content: const Text('Bitte füllen Sie alle Felder aus.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              AutoRouter.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }
