@@ -86,9 +86,32 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                 ),
                 if(snapshot.data!.owner == username)...[
                   ElevatedButton(onPressed: () {
-                  // AutoRouter.of(context).push( MessageEditRoute(id: snapshot.data!.id!));
-                  context.pushRoute(MessageEditRoute(id: snapshot.data!.id!));
-                }, child: const Text('Bearbeiten')),],
+                  AutoRouter.of(context).push(MessageEditRoute(id: snapshot.data!.id!));
+                  //context.pushRoute(MessageEditRoute(id: snapshot.data!.id!));
+                  }, child: const Text('Bearbeiten')),
+                  const SizedBox(height: 10),
+                  ElevatedButton(onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Löschen'),
+                          content: const Text('Wollen Sie diesen Eintrag wirklich löschen?'),
+                          actions: [
+                            TextButton(onPressed: () {
+                              AutoRouter.of(context).pop();
+                            }, child: const Text('Abbrechen')),
+                            TextButton(onPressed: () {
+                              Message().deleteMessage(snapshot.data!.id!);
+                              AutoRouter.of(context).pop();
+                              AutoRouter.of(context).push(const MessageRoute());
+                            }, child: const Text('Löschen')),
+                          ],
+                        );
+                      },
+                    );
+                  }, child: const Text('Löschen')),
+                ],
                 const SizedBox(height: 10),
               ],
             );
