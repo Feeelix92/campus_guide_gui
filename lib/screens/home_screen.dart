@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:campus_guide_gui/widgets/customAppBar.dart';
+import 'package:campus_guide_gui/widgets/customText.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,9 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Willkommen auf der Hauptseite!')
+            H1(text: 'Willkommen auf der Hauptseite!'),
+            CustomText(text: 'Hier können Sie sich durch die App navigieren.'),
+            CustomText(text: 'Viel Spaß!'),
           ],
         ),
       ),
