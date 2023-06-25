@@ -75,12 +75,10 @@ class Message with ChangeNotifier {
   Future<void> postMessageData(String title, String text, String teaser, String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
-    username = prefs.getString('username');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
-    var messageOwner = username!;
 
     print(token);
     try {
@@ -98,7 +96,6 @@ class Message with ChangeNotifier {
             "text": text,
             "teaser": teaser,
             "author": author,
-            "owner": messageOwner,
             "tags": tags
           }));
       print(response);
@@ -114,8 +111,7 @@ class Message with ChangeNotifier {
       throw Exception('ERROR $e');
     }
   }
-  Future<void> putMessageData(
-      String id, String title, String text, String teaser,  String author, List<dynamic> tags) async {
+  Future<void> putMessageData(String id, String title, String text, String teaser, String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
@@ -154,4 +150,37 @@ class Message with ChangeNotifier {
       throw Exception('ERROR $e');
     }
   }
+
+  Future<void> deleteMessage(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token');
+
+    var baseURL = 'http://localhost:9006';
+    var url = '$baseURL/api/v1/messages/$id';
+    var bearerToken = token!;
+    try {
+      final response = await http.delete(
+        Uri.parse(url),
+        headers: {'Authorization': 'Bearer $bearerToken'},
+      );
+
+      if (response.statusCode == 204) {
+        // Erfolgreich gelöscht
+        print('Nachricht erfolgreich gelöscht');
+      } else if (response.statusCode == 400) {
+        // Benutzer nicht berechtigt
+        print('Benutzer nicht berechtigt, die Nachricht zu löschen');
+      } else if (response.statusCode == 404) {
+        // Nachricht nicht gefunden
+        print('Nachricht nicht gefunden');
+      } else {
+        // Unerwarteter Fehler
+        print('Unerwarteter Fehler beim Löschen der Nachricht');
+      }
+    } catch (e) {
+      // Fehler bei der Verbindung oder Anfrage
+      print('Fehler beim Löschen der Nachricht: $e');
+    }
+  }
+
 }

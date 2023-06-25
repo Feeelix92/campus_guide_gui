@@ -128,7 +128,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   actions: [
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pop(context);
+                                        AutoRouter.of(context).pop();
                                       },
                                       child: const Text('Abbruch'),
                                     ),
@@ -136,7 +136,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         onPressed: (){
                                           profile.deleteProfile();
                                           _getUpdatedProfileDataHandler();
-                                          Navigator.pop(context);
+                                          AutoRouter.of(context).pop();
                                         },
                                         child: const Icon(Icons.delete)
                                     )
@@ -385,7 +385,7 @@ class _TopPortion extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () =>  AutoRouter.of(context).pop(),
                           child: const Text('Abbrechen')),
                       const SizedBox(width: 8),
                       FilledButton(
@@ -402,7 +402,7 @@ class _TopPortion extends StatelessWidget {
                           phone,
                           editProfileHandler(firstname, lastname, email, phone),
                           loadNewData(),
-                          Navigator.pop(context)
+                          AutoRouter.of(context).pop()
                         },
                       ),
                     ],
