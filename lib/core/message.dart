@@ -75,12 +75,10 @@ class Message with ChangeNotifier {
   Future<void> postMessageData(String title, String text, String teaser, String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
-    username = prefs.getString('username');
 
     var baseURL = 'http://localhost:9006';
     var url = '$baseURL/api/v1/messages';
     var bearerToken = token!;
-    var messageOwner = username!;
 
     print(token);
     try {
@@ -98,7 +96,6 @@ class Message with ChangeNotifier {
             "text": text,
             "teaser": teaser,
             "author": author,
-            "owner": messageOwner,
             "tags": tags
           }));
       print(response);
@@ -114,7 +111,7 @@ class Message with ChangeNotifier {
       throw Exception('ERROR $e');
     }
   }
-  Future<void> putMessageData(String id, String title, String text, String teaser,  String author, List<dynamic> tags) async {
+  Future<void> putMessageData(String id, String title, String text, String teaser, String author, List<dynamic> tags) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
 
