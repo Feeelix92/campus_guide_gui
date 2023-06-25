@@ -116,7 +116,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
               ],
             );
           } else {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
         }),
       ),

@@ -66,8 +66,7 @@ class LoginScreen extends StatelessWidget {
                           actions: [
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
-                              },
+                                AutoRouter.of(context).pop();                              },
                               child: const Text('OK'),
                             ),
                           ],

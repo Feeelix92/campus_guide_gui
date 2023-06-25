@@ -182,7 +182,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                             actions: [
                                               TextButton(
                                                 onPressed: () {
-                                                  Navigator.pop(context);
+                                                  AutoRouter.of(context).pop();
                                                 },
                                                 child: const Text('OK'),
                                               ),
