@@ -131,15 +131,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                       onPressed: () {
                                         AutoRouter.of(context).pop();
                                       },
-                                      child: const Text('Abbruch'),
+                                      child: const Text('Abbrechen'),
                                     ),
-                                    FilledButton(
+                                    TextButton(
                                         onPressed: (){
                                           profile.deleteProfile();
                                           _getUpdatedProfileDataHandler();
                                           AutoRouter.of(context).pop();
                                         },
-                                        child: const Icon(Icons.delete)
+                                        child: const Text('Bestätigen')
                                     )
                                   ],
                                 ),
