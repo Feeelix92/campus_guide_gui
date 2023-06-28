@@ -50,7 +50,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
         child: FutureBuilder(future: messageData, builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Center(
-              child: Container(
+              child: SizedBox(
                 width: screenWidth-0.1*screenWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

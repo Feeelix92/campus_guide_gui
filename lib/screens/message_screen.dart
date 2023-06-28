@@ -73,10 +73,17 @@ class _MessageScreenState extends State<MessageScreen> {
                     } else if (snapshot.hasError) {
                       return const Text('Es sind noch keine Nachrichten vorhanden.');
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: Column(children: [
+                      SizedBox(height: 20),
+                      CircularProgressIndicator(),
+                    ]));
                   }),
             ] else ...[
-              const Center(child: CircularProgressIndicator())
+              const Center(child: Column(children: [
+                Text('Einen kleinen Moment bitte, die Nachrichten werden geladen.'),
+                SizedBox(height: 20),
+                CircularProgressIndicator(),
+              ]))
             ],
           ],
         ),

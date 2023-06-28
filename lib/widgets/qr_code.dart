@@ -38,10 +38,10 @@ class _QrCodeState extends State<QrCode> {
           ' Semesterticket gültig bis: $formattedEndSemesterTicket',
       version: QrVersions.auto,
       size: 200.0,
-      dataModuleStyle: const QrDataModuleStyle(
-          dataModuleShape: QrDataModuleShape.circle, color: Colors.green),
+      dataModuleStyle: QrDataModuleStyle(
+          dataModuleShape: QrDataModuleShape.circle, color: Theme.of(context).colorScheme.primary),
       eyeStyle:
-          const QrEyeStyle(eyeShape: QrEyeShape.circle, color: Colors.green),
+        QrEyeStyle(eyeShape: QrEyeShape.circle, color: Theme.of(context).colorScheme.primary),
     );
   }
 }
