@@ -7,6 +7,7 @@ import '../core/message.dart';
 import '../model/message_data.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
+import '../widgets/customErrorDialog.dart';
 import '../widgets/h1.dart';
 
 @RoutePage()
@@ -176,22 +177,7 @@ class _MessageEditScreenState extends State<MessageEditScreen> {
                                               snapshot.data!.id! ,titel, text, teaser, author, _tags);
                                           AutoRouter.of(context).push(const MessageRoute());
                                         } else {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                              title: const Text('Fehler'),
-                                              content: const Text(
-                                                  'Bitte füllen Sie alle Felder aus.'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    AutoRouter.of(context).pop();
-                                                  },
-                                                  child: const Text('OK'),
-                                                ),
-                                              ],
-                                            ),
-                                          );
+                                          customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
                                         }
                                       },
                                       child: const Text('Nachricht posten'),

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../core/auth.dart';
 import '../data/constants.dart';
+import '../widgets/customErrorDialog.dart';
 import '../widgets/h1.dart';
 import 'home_screen.dart';
 
@@ -13,8 +14,9 @@ import 'home_screen.dart';
 class LoginScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   LoginScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
@@ -24,7 +26,10 @@ class LoginScreen extends StatelessWidget {
         ),
         body: Center(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 3,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width / 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -49,29 +54,28 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    final autoRouter = AutoRouter.of(context);
                     String username = _usernameController.text;
                     String password = _passwordController.text;
-
                     // Beispiel-Validierung: Überprüfen, ob Benutzername und Passwort nicht leer sind
                     if (username.isNotEmpty && password.isNotEmpty) {
-                      authData.login(username, password);
-                      AutoRouter.of(context).push(const HomeRoute());
+                      // Authentifizierung durchführen
+                      var successfulLogin = await authData.login(
+                          username, password);
+                      if (successfulLogin && context.mounted) {
+                        print('LoginScreen: Authentifizierung erfolgreich');
+                        autoRouter.push(const HomeRoute());
+                      } else {
+                        print(
+                            'LoginScreen: Authentifizierung nicht erfolgreich');
+                        await customErrorDialog(context, 'Fehler',
+                            'Username oder Passwort ungültig.'); // Funktion aufrufen und warten, bis der Dialog geschlossen ist
+                      }
                     } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Fehler'),
-                          content: const Text('Ungültiger Benutzername oder Passwort.'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                AutoRouter.of(context).pop();                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      );
+                      // Zeige Dialog, wenn Felder leer sind
+                      await customErrorDialog(context, 'Fehler',
+                          'Bitte füllen Sie alle Felder aus!'); // Funktion aufrufen und warten, bis der Dialog geschlossen ist
                     }
                   },
                   child: const Text('Anmelden'),

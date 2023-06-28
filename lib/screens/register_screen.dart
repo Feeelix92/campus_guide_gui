@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:campus_guide_gui/widgets/customErrorDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +8,6 @@ import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/h1.dart';
-import 'home_screen.dart';
 
 @RoutePage()
 class RegistrationScreen extends StatelessWidget {
@@ -106,24 +106,9 @@ class RegistrationScreen extends StatelessWidget {
                           password.isNotEmpty) {
                         authData.register(username, firstname, lastname, email,
                             phone, password);
-                        AutoRouter.of(context).push(const HomeRoute());
+                        AutoRouter.of(context).push(LoginRoute());
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text('Fehler'),
-                            content:
-                                const Text('Bitte füllen Sie alle Felder aus.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  AutoRouter.of(context).pop();
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
+                        customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
                       }
                     },
                     child: const Text('Registrieren'),

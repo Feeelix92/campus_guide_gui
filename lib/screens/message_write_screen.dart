@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../core/app_router.gr.dart';
 import '../core/message.dart';
+import '../widgets/customErrorDialog.dart';
 import '../widgets/h1.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
@@ -133,23 +134,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                         message.postMessageData(titel, text, teaser, author, _tags);
                         AutoRouter.of(context).push(const MessageRoute());
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              AlertDialog(
-                                title: const Text('Fehler'),
-                                content: const Text(
-                                    'Bitte füllen Sie alle Felder aus.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      AutoRouter.of(context).pop();
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                        );
+                        customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
                       }
                     },
                     child: const Text('Nachricht posten'),
