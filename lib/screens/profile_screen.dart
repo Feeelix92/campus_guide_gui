@@ -13,6 +13,7 @@ import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 import '../core/profile.dart';
 import '../model/profile_data.dart';
+import '../widgets/logoutButton.dart';
 import '../widgets/studentId.dart';
 import '../widgets/h2.dart';
 
@@ -116,7 +117,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         matriculationNumber: matriculationNumber,
                         startSemesterTicket: startSemesterTicket,
                         endSemesterTicket: endSemesterTicket),
-                    OutlinedButton(
+                    ElevatedButton(
                         onPressed: () {
                           showDialog(
                             context: context,
@@ -144,7 +145,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 ),
                           );
                         },
-                        child: const Text('Profil löschen'))
+                        child: const Text('Profil löschen')),
+                    const SizedBox(height: 10),
+                    LogoutButton(authData: authData),
                   ],
                 );
               } else {
@@ -168,7 +171,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     });
   }
 }
-
 /*class ProfileInfoItem {
   final String title;
   late String value;
