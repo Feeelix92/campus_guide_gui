@@ -18,7 +18,7 @@ import 'package:campus_guide_gui/screens/message_edit_screen.dart' as _i6;
 import 'package:campus_guide_gui/screens/message_screen.dart' as _i7;
 import 'package:campus_guide_gui/screens/message_write_screen.dart' as _i8;
 import 'package:campus_guide_gui/screens/profile_screen.dart' as _i9;
-import 'package:campus_guide_gui/screens/recreate_profile_screen.dart' as _i10;
+import 'package:campus_guide_gui/screens/profile_recreate_screen.dart' as _i10;
 import 'package:campus_guide_gui/screens/register_screen.dart' as _i11;
 import 'package:flutter/material.dart' as _i13;
 
