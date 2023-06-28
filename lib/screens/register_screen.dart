@@ -7,7 +7,6 @@ import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/h1.dart';
-import 'home_screen.dart';
 
 @RoutePage()
 class RegistrationScreen extends StatelessWidget {
@@ -106,7 +105,7 @@ class RegistrationScreen extends StatelessWidget {
                           password.isNotEmpty) {
                         authData.register(username, firstname, lastname, email,
                             phone, password);
-                        AutoRouter.of(context).push(const HomeRoute());
+                        AutoRouter.of(context).push(LoginRoute());
                       } else {
                         showDialog(
                           context: context,
