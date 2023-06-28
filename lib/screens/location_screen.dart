@@ -34,7 +34,7 @@ class _LocationScreenState extends State<LocationScreen> {
         point: markerPosition,
         width: 40,
         height: 40,
-        builder: (_) => const Icon(Icons.location_on, size: 40),
+        builder: (_) => Icon(Icons.location_on, size: 40, color: Theme.of(context).colorScheme.primary),
         anchorPos: AnchorPos.align(AnchorAlign.top),
         rotateAlignment: AnchorAlign.top.rotationAlignment,
       ),
@@ -51,16 +51,15 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
-      drawer: AppDrawer(),
+      appBar: const CustomAppBar(),
+      drawer: const AppDrawer(),
       body: Center(
         child: Column(
           children: [
-            H1(text: 'Location Page'),
             Expanded(
               child: FlutterMap(
                   options: MapOptions(
-                      zoom: 13,
+                      zoom: 18,
                       maxZoom: 18,
                       keepAlive: true,
                       center: LatLng(50.33739, 8.75591)),

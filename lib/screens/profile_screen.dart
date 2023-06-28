@@ -275,7 +275,6 @@ class _TopPortion extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(bottom: 50),
           decoration: const BoxDecoration(
-              color: Colors.green,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
@@ -300,7 +299,7 @@ class _TopPortion extends StatelessWidget {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border:
-                                  Border.all(color: Colors.green, width: 3)),
+                                  Border.all(color: Theme.of(context).colorScheme.primary, width: 3)),
                           child: SvgPicture.string(userImage,
                               width: 50, height: 50),
                         ),
