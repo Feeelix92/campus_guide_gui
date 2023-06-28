@@ -71,12 +71,12 @@ class _MessageScreenState extends State<MessageScreen> {
                         ),
                       );
                     } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
+                      return const Text('Es sind noch keine Nachrichten vorhanden.');
                     }
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }),
             ] else ...[
-              const CircularProgressIndicator()
+              const Center(child: CircularProgressIndicator())
             ],
           ],
         ),

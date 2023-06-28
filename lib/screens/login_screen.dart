@@ -11,11 +11,10 @@ import 'home_screen.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  LoginScreen({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {

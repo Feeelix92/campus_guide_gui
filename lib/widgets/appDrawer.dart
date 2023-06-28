@@ -58,8 +58,25 @@ class AppDrawer extends StatelessWidget {
               ),
               title: const Text('Abmelden'),
               onTap: () {
-                authData.logout();
-                AutoRouter.of(context).push(const HomeRoute());
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Abmelden'),
+                      content: const Text('Möchten Sie sich wirklich abmelden?'),
+                      actions: [
+                        TextButton(onPressed: () {
+                          AutoRouter.of(context).pop();
+                        }, child: const Text('Abbrechen')),
+                        TextButton(onPressed: () {
+                          authData.logout();
+                          AutoRouter.of(context).pop();
+                          AutoRouter.of(context).push(const HomeRoute());
+                        }, child: const Text('Abmelden')),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ]

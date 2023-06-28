@@ -49,16 +49,14 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const CustomAppBar(),
       drawer: const AppDrawer(),
         body: SingleChildScrollView(
           child: Center(
             child: SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 3,
+              width: screenWidth-0.1*screenWidth,
               child: Column(
                 children: [
                   const H1(text: 'Schreiben Sie einen Beitrag'),
