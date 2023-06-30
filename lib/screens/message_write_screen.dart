@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../core/app_router.gr.dart';
@@ -132,6 +131,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                       if (titel.isNotEmpty && text.isNotEmpty &&
                           author.isNotEmpty) {
                         message.postMessageData(titel, text, teaser, author, _tags);
+                        setState(() {});
                         AutoRouter.of(context).push(const MessageRoute());
                       } else {
                         customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
