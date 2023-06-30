@@ -124,7 +124,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         } else {
                           print(
                           'RegistrationScreen: Registrierung nicht erfolgreich');
-                           await customErrorDialog(context, 'Fehler', 'Die Registrierung konnte nicht durchgeführt werden. Username bereits vorhanden.'); // Funktion aufrufen und warten, bis der Dialog geschlossen ist
+                           await customErrorDialog(context, 'Fehler', 'Username bereits vorhanden. Die Registrierung konnte nicht durchgeführt werden.'); // Funktion aufrufen und warten, bis der Dialog geschlossen ist
                         }
                       } else {
                         customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
