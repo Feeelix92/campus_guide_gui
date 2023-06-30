@@ -9,16 +9,20 @@ Future<void> main() async {
   var data = prefs.getString('token') ?? ''; //null check
   runApp(ChangeNotifierProvider(
     create: (context) => Auth(),
-    child: MyApp(),
+    child: const MyApp(),
   ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _appRouter = AppRouter();
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

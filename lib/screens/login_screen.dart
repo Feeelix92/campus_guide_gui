@@ -68,7 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       var successfulLogin = await authData.login(
                           username, password);
                       if (successfulLogin && context.mounted) {
-                        setState(() {});
                         print('LoginScreen: Authentifizierung erfolgreich');
                         autoRouter.push(const HomeRoute());
                       } else {

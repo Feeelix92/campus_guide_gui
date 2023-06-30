@@ -19,6 +19,7 @@ class Auth with ChangeNotifier {
   get authToken async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('token');
+    notifyListeners();
   }
 
   void delayFunction() async {

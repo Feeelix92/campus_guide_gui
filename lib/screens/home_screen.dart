@@ -3,7 +3,6 @@ import 'package:campus_guide_gui/widgets/customAppBar.dart';
 import 'package:campus_guide_gui/widgets/customText.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/appDrawer.dart';
 
 @RoutePage()

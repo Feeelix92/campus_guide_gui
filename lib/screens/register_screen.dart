@@ -120,7 +120,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             phone, password);
                         if (successfulRegistration && context.mounted) {
                           print('RegistrationScreen: Registrierung erfolgreich');
-                          setState(() {});
                           autoRouter.push(const HomeRoute());
                         } else {
                           print(
