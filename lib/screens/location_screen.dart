@@ -5,7 +5,6 @@ import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong2/latlong.dart';
 import '../widgets/appDrawer.dart';
 import '../widgets/customAppBar.dart';
-import '../widgets/h1.dart';
 import '../widgets/example_popup.dart';
 
 @RoutePage()

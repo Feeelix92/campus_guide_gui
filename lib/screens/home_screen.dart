@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/core/app_router.gr.dart';
 import 'package:campus_guide_gui/widgets/customAppBar.dart';
 import 'package:campus_guide_gui/widgets/customText.dart';
 import 'package:campus_guide_gui/widgets/h1.dart';

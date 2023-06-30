@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:campus_guide_gui/screens/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../core/app_router.gr.dart';

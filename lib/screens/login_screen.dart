@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:campus_guide_gui/core/app_router.gr.dart';
-import 'package:campus_guide_gui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,6 @@ import '../core/auth.dart';
 import '../data/constants.dart';
 import '../widgets/customErrorDialog.dart';
 import '../widgets/h1.dart';
-import 'home_screen.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
