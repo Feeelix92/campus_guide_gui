@@ -132,6 +132,7 @@ class _MessageWriteScreenState extends State<MessageWriteScreen> {
                       if (titel.isNotEmpty && text.isNotEmpty &&
                           author.isNotEmpty) {
                         message.postMessageData(titel, text, teaser, author, _tags);
+                        setState(() {});
                         AutoRouter.of(context).push(const MessageRoute());
                       } else {
                         customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');

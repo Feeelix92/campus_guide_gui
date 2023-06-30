@@ -10,15 +10,26 @@ import '../data/constants.dart';
 import '../widgets/h1.dart';
 
 @RoutePage()
-class RegistrationScreen extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _firstnameController = TextEditingController();
-  final TextEditingController _lastnameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class RegistrationScreen extends StatefulWidget {
 
-  RegistrationScreen({super.key});
+  const RegistrationScreen({super.key});
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+
+  final TextEditingController _firstnameController = TextEditingController();
+
+  final TextEditingController _lastnameController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _phoneController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +100,8 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final autoRouter = AutoRouter.of(context);
                       String username = _usernameController.text;
                       String firstname = _firstnameController.text;
                       String lastname = _lastnameController.text;
@@ -104,9 +116,17 @@ class RegistrationScreen extends StatelessWidget {
                           email.isNotEmpty &&
                           phone.isNotEmpty &&
                           password.isNotEmpty) {
-                        authData.register(username, firstname, lastname, email,
+                        var successfulRegistration = await authData.register(username, firstname, lastname, email,
                             phone, password);
-                        AutoRouter.of(context).push(LoginRoute());
+                        if (successfulRegistration && context.mounted) {
+                          print('RegistrationScreen: Registrierung erfolgreich');
+                          setState(() {});
+                          autoRouter.push(const HomeRoute());
+                        } else {
+                          print(
+                          'RegistrationScreen: Registrierung nicht erfolgreich');
+                           await customErrorDialog(context, 'Fehler', 'Die Registrierung konnte nicht durchgeführt werden. Username bereits vorhanden.'); // Funktion aufrufen und warten, bis der Dialog geschlossen ist
+                        }
                       } else {
                         customErrorDialog(context, 'Fehler', 'Bitte füllen Sie alle Felder aus.');
                       }

@@ -11,11 +11,17 @@ import '../widgets/h1.dart';
 import 'home_screen.dart';
 
 @RoutePage()
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +70,7 @@ class LoginScreen extends StatelessWidget {
                       var successfulLogin = await authData.login(
                           username, password);
                       if (successfulLogin && context.mounted) {
+                        setState(() {});
                         print('LoginScreen: Authentifizierung erfolgreich');
                         autoRouter.push(const HomeRoute());
                       } else {

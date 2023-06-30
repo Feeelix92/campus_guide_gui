@@ -69,7 +69,7 @@ class Auth with ChangeNotifier {
     return false;
   }
 
-  Future<void> register(String username,String firstname, String lastname, String password, String phone, String email) async {
+  Future<bool> register(String username,String firstname, String lastname, String password, String phone, String email) async {
     var baseURL = 'http://localhost:8080';
     var url = '$baseURL/api/v1/auth/register';
     print(url);
@@ -86,6 +86,8 @@ class Auth with ChangeNotifier {
           }));
       if (response.statusCode == 403) {
         print('403 Error');
+      } else if (response.statusCode == 500){
+        print('500 Error');
       } else if (response.statusCode == 200) {
         print('Response from Registration: ${response.body}');
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -98,10 +100,12 @@ class Auth with ChangeNotifier {
           prefs.setString('username', username);
           profile.createProfile(firstname, lastname, email, phone);
         }
+        return true;
       }
     } catch (e) {
       throw Exception('ERROR $e');
     }
     notifyListeners();
+    return false;
   }
 }

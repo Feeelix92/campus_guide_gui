@@ -5,9 +5,14 @@ import 'package:provider/provider.dart';
 import '../core/app_router.gr.dart';
 import '../core/auth.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
 
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Consumer<Auth>(builder: (context, authData, child) {
